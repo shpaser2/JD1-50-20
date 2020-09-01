@@ -32,12 +32,14 @@ public class HelloByNamesMain2 {
      * @param args массив строк, ввод
      */
     public static void main(String[] args) {
+        String anastasia = "Анастасия";
+        String vasia = "Вася";
         Scanner in = new Scanner(System.in);
         System.out.print("Введите имя: ");
         String name = in.next();
-        if (Objects.equals(name, "Анастасия")) {
+        if (Objects.equals(name, anastasia)) {
             System.out.println("Я тебя так долго ждал");
-        } else if (Objects.equals(name, "Вася")) {
+        } else if (Objects.equals(name, vasia)) {
             System.out.println("Привет!");
             System.out.println("Я тебя так долго ждал");
         } else {
