@@ -17,19 +17,17 @@ package cyclesAndArrays;
 import java.util.ArrayList;
 
 /**
- * Класс - пример ...
+ * Класс - пример разбиения числа на цифры
+ * и нахождения их произведения.
  *
- * @version   1.00 06.09.2020
+ * @version   1.01 06.09.2020
  * @author    Сергей Шпаковский
  */
 public class MultiplyDigitsMain {
     
-    //Пример: Ввели 181232375,
-    // должно получиться в консоли: 1 * 8 * 1 * 2 * …. * 5 = ответ
     /**
-     * Точка входа и пример ...
-     *
-     * @param args массив строк, ввод
+     * Разложение числа на цифры и вывод их произведения.
+     * @param args массив строк, аргументы при запуске
      */
     public static void main(String[] args) {
         try {
@@ -68,7 +66,9 @@ public class MultiplyDigitsMain {
         }
     }
     
-    //XXX
+    /**
+     * Вывод подсказки для корректного использования аргумента.
+     */
     private static void printHelp() {
         System.out.println("Argument must be positive integer number,\n"
                 + "consist of two or more digits "

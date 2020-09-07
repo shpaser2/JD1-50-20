@@ -15,22 +15,23 @@
 package cyclesAndArrays;
 
 /**
- * Класс - пример ...
+ * Класс - пример калькуляции факториала от числа,
+ * переданного аргументом в программу.
  *
- * @version   1.00 06.09.2020
+ * @version   1.01 06.09.2020
  * @author    Сергей Шпаковский
  */
 public class MultiplyNumbersMain {
     
     /**
-     * Точка входа и пример ...
-     *
-     * @param args массив строк, ввод
+     * Вычисление факториала с обработкой переполнения, ошибок ввода,
+     * отображением результата и множителя последних до переполнения.
+     * @param args массив строк, аргументы при запуске
      */
     public static void main(String[] args) {
         try {
             int parameter = Integer.parseInt(args[0]);
-            if (parameter == 0) {
+            if (parameter <= 0) {
                 printHelp();
                 return;
             }
@@ -63,7 +64,9 @@ public class MultiplyNumbersMain {
         }
     }
     
-    //XXX
+    /**
+     * Вывод подсказки для корректного использования аргумента.
+     */
     private static void printHelp() {
         System.out.println("Argument must be integer " +
                 "and higher than 0.");

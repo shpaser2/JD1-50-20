@@ -17,21 +17,19 @@ package cyclesAndArrays;
 import java.util.Scanner;
 
 /**
- * Класс - пример ...
+ * Класс - пример возведения числа в степень.
  *
- * @version   1.00 06.09.2020
+ * @version   1.01 06.09.2020
  * @author    Сергей Шпаковский
  */
 public class PowNumberMain {
     private static int MAX_POWER = 30;
     
     /**
-     * Точка входа и пример ...
-     *
-     * @param args массив строк, ввод
+     * Ввод с консоли числа и степени
+     * в которую оно будет возведено при корректном значении степени
+     * @param args массив строк, аргументы при запуске программы
      */
-    //Степень - только положительная и целая. Возводимое число -
-    // может быть отрицательным и дробным.
     public static void main(String[] args) {
         double number = 1;
         boolean resultIsDouble = false;
@@ -66,7 +64,11 @@ public class PowNumberMain {
         }
     }
     
-    //XXX
+    /**
+     * Проверка значения степени на недопустимые значения
+     * @param power значение степени
+     * @return результат проверки
+     */
     private static boolean checkWrongParameters(double power) {
         boolean checkIsNegative = power < 0;
         boolean checkNotInteger = (power % 1) > 0;

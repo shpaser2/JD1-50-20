@@ -33,7 +33,6 @@ public class BubbleShakeSortsMain {
      * шейкерной сортировки с целочисленными массивами.
      * Пример создания массива случайной длины со случайными
      * целыми числами и ввода целочисленного массива с консоли.
-     *
      * @param args массив строк, передаваемые аргументы при запуске
      */
     public static void main(String[] args) {
@@ -143,7 +142,7 @@ public class BubbleShakeSortsMain {
      * Метод создает массив с помощью ввода целых чисел в консоль
      * через разделитель в виде пробела и/или запятой.
      */
-    private static void createArrByConsoleInput() {
+    public static int[] createArrByConsoleInput() {
         boolean keyboardInputResultWrong = false;
         String[] partsWithNumbers = {};
         Scanner in = new Scanner(System.in);
@@ -166,5 +165,6 @@ public class BubbleShakeSortsMain {
         }
         System.out.println("Создан следующий массив чисел:");
         System.out.println(Arrays.toString(testHandArray));
+        return testHandArray;
     }
 }

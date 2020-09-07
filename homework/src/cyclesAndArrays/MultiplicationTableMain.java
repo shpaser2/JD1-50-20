@@ -15,17 +15,17 @@
 package cyclesAndArrays;
 
 /**
- * Класс - пример ...
+ * Класс для создания таблицы умножения
+ * произвольного диапазона чисел.
  *
- * @version   1.00 06.09.2020
+ * @version   1.01 06.09.2020
  * @author    Сергей Шпаковский
  */
 public class MultiplicationTableMain {
     
     /**
-     * Точка входа и пример ...
-     *
-     * @param args массив строк, ввод
+     * Вывод таблицы умножения как на обороте тетрадок в клетку.
+     * @param args строк массив, аргументы при выполнении программы
      */
     public static void main(String[] args) {
         printPartOfTable(2, 5);
@@ -33,7 +33,13 @@ public class MultiplicationTableMain {
         printPartOfTable(6, 9);
     }
     
-    //XXX
+    /**
+     * Распечатывает один ряд столбцов таблицы умножения
+     * с последовательным умножением чисел в диапазоне между
+     * переданными аргументами на числа от 1 до 10.
+     * @param startNum  цисло для умножения в первом столбце ряда.
+     * @param endNum    число для умножения в последнем столбце ряда.
+     */
     private static void printPartOfTable(int startNum, int endNum) {
         int result;
         for (int i = 1; i <= 10; i++) {
