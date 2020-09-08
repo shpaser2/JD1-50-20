@@ -12,7 +12,7 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package cyclesAndArrays;
+package homework2;
 
 import java.util.Scanner;
 

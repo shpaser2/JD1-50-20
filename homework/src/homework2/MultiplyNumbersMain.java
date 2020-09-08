@@ -12,53 +12,51 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package cyclesAndArrays;
-
-import java.util.ArrayList;
+package homework2;
 
 /**
- * Класс - пример разбиения числа на цифры
- * и нахождения их произведения.
+ * Класс - пример калькуляции факториала от числа,
+ * переданного аргументом в программу.
  *
  * @version   1.01 06.09.2020
  * @author    Сергей Шпаковский
  */
-public class MultiplyDigitsMain {
+public class MultiplyNumbersMain {
     
     /**
-     * Разложение числа на цифры и вывод их произведения.
+     * Вычисление факториала с обработкой переполнения, ошибок ввода,
+     * отображением результата и множителя последних до переполнения.
      * @param args массив строк, аргументы при запуске
      */
     public static void main(String[] args) {
         try {
-            int argument = Integer.parseInt(args[0]);
-            if (argument < 10) {
+            int parameter = Integer.parseInt(args[0]);
+            if (parameter <= 0) {
                 printHelp();
                 return;
             }
-            ArrayList arl = new ArrayList();
-            while (argument > 0) {
-                arl.add(argument % 10);
-                argument /= 10;
-            }
-            int digitsNumber = arl.size();
-            int[] digits = new int[digitsNumber];
-            int ind = 0;
-            for (Object i : arl) {
-                digits[ind] = ((Integer)i).intValue();
-                ind++;
-            }
             long result = 1;
-            int maxIndex = digits.length - 1;
-            for (int index = maxIndex; index >= 0; index--) {
-                if (index != maxIndex) {
+            long buffer = 1;
+            int index = 1;
+            for (; index <= parameter; index++) {
+                if (index != 1) {
                     System.out.print(" * ");
                 }
-                System.out.print(digits[index]);
-                result *= digits[index];
-                if (index == 0) {
-                    System.out.println(" = " + result);
+                System.out.print(index);
+                buffer *= index;
+                if (buffer > 0) {
+                    result = buffer;
+                } else {
+                    System.out.println();
+                    System.out.println("Calculation error. " +
+                            "Last good result at " + (index - 1));
+                    break;
                 }
+            }
+            if (--index == parameter) {
+                System.out.println(" = " + result);
+            } else {
+                System.out.println("Last result is " + result);
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -70,8 +68,7 @@ public class MultiplyDigitsMain {
      * Вывод подсказки для корректного использования аргумента.
      */
     private static void printHelp() {
-        System.out.println("Argument must be positive integer number,\n"
-                + "consist of two or more digits "
-                + "and be lower than 2147483648.");
+        System.out.println("Argument must be integer " +
+                "and higher than 0.");
     }
 }

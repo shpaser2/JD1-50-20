@@ -12,7 +12,7 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package cyclesAndArrays;
+package homework2;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -150,7 +150,7 @@ public class BubbleShakeSortsMain {
             System.out.println("Введите целые числа через запятую и/или "
                     + "пробелы.");
             String rawNumbers = in.nextLine();
-            if (rawNumbers.contains(".")) {
+            if (rawNumbers.contains("")) {
                 System.out.println("Введены дробные числа или точки. "
                         + "Придется вводить заново.");
                 keyboardInputResultWrong = true;

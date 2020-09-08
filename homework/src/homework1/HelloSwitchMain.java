@@ -12,30 +12,38 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package cyclesAndArrays;
+package homework1;
+
+import java.util.Scanner;
 
 /**
- * Класс - пример получения переполнения примитивного типа long.
+ * Класс - пример использования switch и ввода строки с консоли.
  *
- * @version   1.00 06.09.2020
+ * @version   1.00 29.08.2020
  * @author    Сергей Шпаковский
  */
-public class PowUntilOverflowMain {
+public class HelloSwitchMain {
     
     /**
-     * Точка входа и пример получения переполнения
-     * примитивного целочисленного типа long.
-     * @param args массив строк, передаваемые аргументы при запуске
+     * Точка входа и пример использования switch
+     * и ввода строки с консоли.
+     *
+     * @param args массив строк, ввод
      */
     public static void main(String[] args) {
-        long result = 1;
-        long bufResult = 1;
-        
-        while (bufResult > 0) {
-            result = bufResult;
-            bufResult *= 3;
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите имя: ");
+        String name = in.next();
+        switch (name) {
+            case "Вася":
+                System.out.println("Привет!");
+                //провал
+            case "Анастасия":
+                System.out.println("Я тебя так долго ждал");
+                break;
+            default:
+                System.out.println("Добрый день, а вы кто?");
+                break;
         }
-        System.out.println("Result before overflow is " + result);
-        System.out.println("Result after overflow is " + bufResult);
     }
 }

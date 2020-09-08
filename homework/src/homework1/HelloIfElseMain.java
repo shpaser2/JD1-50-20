@@ -12,38 +12,40 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package operators;
+package homework1;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Класс - пример использования switch и ввода строки с консоли.
+ * Класс - пример использования if-else if и ввода строки с консоли.
  *
  * @version   1.00 29.08.2020
  * @author    Сергей Шпаковский
  */
-public class HelloByNamesMain3 {
+public class HelloIfElseMain {
     
     /**
-     * Точка входа и пример использования switch
-     * и ввода строки с консоли.
+     * Точка входа и пример использования if-else if,
+     * ввода строки с консоли, сравнения двух строк.
      *
      * @param args массив строк, ввод
      */
     public static void main(String[] args) {
+        String girlFriend = "Анастасия";
+        String friend = "Вася";
         Scanner in = new Scanner(System.in);
         System.out.print("Введите имя: ");
         String name = in.next();
-        switch (name) {
-            case "Вася":
-                System.out.println("Привет!");
-                //провал
-            case "Анастасия":
-                System.out.println("Я тебя так долго ждал");
-                break;
-            default:
-                System.out.println("Добрый день, а вы кто?");
-                break;
+        Boolean checkFriend = Objects.equals(name, friend);
+        Boolean checkGirlFriend = Objects.equals(name, girlFriend);
+        if (checkGirlFriend) {
+            System.out.println("Я тебя так долго ждал");
+        } else if (checkFriend) {
+            System.out.println("Привет!");
+            System.out.println("Я тебя так долго ждал");
+        } else {
+            System.out.println("Добрый день, а вы кто?");
         }
     }
 }

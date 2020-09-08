@@ -12,7 +12,7 @@
  * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
  * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
  */
-package operators;
+package homework1;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -23,7 +23,7 @@ import java.util.Scanner;
  * @version   1.00 29.08.2020
  * @author    Сергей Шпаковский
  */
-public class HelloByNamesMain1 {
+public class HelloIfMain {
     
     /**
      * Точка входа и пример использования if-else,
