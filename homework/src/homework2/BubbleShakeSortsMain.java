@@ -41,8 +41,8 @@ public class BubbleShakeSortsMain {
         for (int[] array : testArrays) {
             sortArrayByTwoMethods(array);
         }
-        createRandArray();
-        createArrByConsoleInput();
+        sortArrayByTwoMethods(createRandArray());
+        sortArrayByTwoMethods(createArrByConsoleInput());
     }
     
     /**
@@ -125,9 +125,9 @@ public class BubbleShakeSortsMain {
      * Метод создает массив случайной длины со случайными целыми
      * числами.
      */
-    private static void createRandArray() {
+    private static int[] createRandArray() {
         Random random = new Random();
-        int maxArrLength = 100;
+        int maxArrLength = 10;
         int maxNumberValue = 1993;
         int[] testRandArray = new int[random.nextInt(maxArrLength)];
         for (int i = 0; i < testRandArray.length; i++) {
@@ -136,6 +136,7 @@ public class BubbleShakeSortsMain {
         System.out.println("Создан массив рандомной длины с рандомными "
                 + "числами");
         System.out.println(Arrays.toString(testRandArray));
+        return testRandArray;
     }
     
     /**
@@ -150,7 +151,7 @@ public class BubbleShakeSortsMain {
             System.out.println("Введите целые числа через запятую и/или "
                     + "пробелы.");
             String rawNumbers = in.nextLine();
-            if (rawNumbers.contains("")) {
+            if (rawNumbers.contains(".")) {
                 System.out.println("Введены дробные числа или точки. "
                         + "Придется вводить заново.");
                 keyboardInputResultWrong = true;
