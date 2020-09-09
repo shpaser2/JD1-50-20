@@ -22,6 +22,6 @@ public class MainForEnum {
         // использовать - при смене порядка в ENUM сломает приложение.
         System.out.println(day.name());     // всегда вернет имя элемента
         System.out.println(day.toString()); // может вернуть имя элемента
-        Day day2 = Day.valueOf("fdsfsdf");
+        Day day2 = Day.valueOf("MONDAY");
     }
 }
