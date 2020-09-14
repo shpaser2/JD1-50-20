@@ -56,69 +56,11 @@ public class BubbleShakeSortsMain {
         System.out.println("Сортируем следующий массив: ");
         System.out.println(Arrays.toString(array));
         System.out.println("Сортировка шейкерная.");
-        shakeSort(arr1);
+        Sorts.shakeSort(arr1);
         System.out.println(Arrays.toString(arr1));
         System.out.println("Сортировка пузырьком.");
-        bubbleSort(arr2);
+        Sorts.bubbleSort(arr2);
         System.out.println(Arrays.toString(arr2));
-    }
-    
-    /**
-     * Пузырьковая сортировка целочисленного массива.
-     * @param arr целочисленный массив для сортировки
-     */
-    private static void bubbleSort(int[] arr) {
-        for (int maxUnsortedIndex = arr.length - 1;
-             maxUnsortedIndex > 0;
-             maxUnsortedIndex--) {
-            for (int i = 0; i < maxUnsortedIndex; i++) {
-                if (arr[i] > arr[i + 1]) {
-                    swapElements(arr, i, i + 1);
-                }
-            }
-        }
-    }
-    
-    /**
-     * Шейкерная сортировка для int[].
-     * @param arr целочисленный массив для сортировки.
-     */
-    private static void shakeSort(int[] arr) {
-        int minUnsInd = 0;
-        int maxUnsInd = arr.length - 1;
-        boolean swapUp;
-        boolean swapDown;
-        do {
-            swapUp = false;
-            swapDown = false;
-            for (int i = minUnsInd; i < maxUnsInd; i++) {
-                if (arr[i] > arr[i + 1]) {
-                    swapElements(arr, i, i + 1);
-                    swapUp = true;
-                }
-            }
-            maxUnsInd--;
-            for (int i = maxUnsInd; i > minUnsInd; i--) {
-                if (arr[i] < arr[i - 1]) {
-                    swapElements(arr, i, i - 1);
-                    swapDown = true;
-                }
-            }
-            minUnsInd++;
-        } while (swapUp || swapDown);
-    }
-    
-    /**
-     * Метод меняющий два любых элемента массива местами.
-     * @param arr массив для действий
-     * @param a индекс элемента для замены элементом с индексом b
-     * @param b индекс другого элемента для замены с индексом a
-     */
-    private static void swapElements(int[] arr, int a, int b) {
-        int buf;
-        buf = arr[a];
-        arr[a] = arr[b];
-        arr[b] = buf;
     }
     
     /**
