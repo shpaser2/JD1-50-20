@@ -44,13 +44,8 @@ public class CalculatorMain {
     }
     
     public void test(Calculator calc) {
-//        if (calc.getClass().getSimpleName() != "CalculatorWithCounter") {
         System.out.println(calc.getClass().getSimpleName()
                 + " result and operations counter");
-//        } else {
-//            System.out.println(calc.getCalc().getClass().getSimpleName()
-//                    + " result and operations counter");
-//        }
         
         System.out.println(calc.squareRoot(343396));
         System.out.println(calc.squareRoot(998001));
@@ -73,9 +68,10 @@ public class CalculatorMain {
     }
     
     public void test(CalculatorWithCounter calc) {
-        System.out.println(calc.getCalc().getClass().getSimpleName()
-                + " result and operations counter");
+        System.out.print("CalculatorWithCounter uses ");
+        System.out.println(calc.getCalc().getClass().getSimpleName());
         
+        //3.1.1, 3.1.2
         System.out.println(calc.squareRoot(343396));
         System.out.println(calc.squareRoot(998001));
         System.out.println(calc.squareRoot(28699));
@@ -84,7 +80,6 @@ public class CalculatorMain {
         System.out.println(calc.powerDouble(1.5, 2));
         System.out.println(calc.powerDouble(-1.5, 2));
         System.out.println(calc.powerDouble(5, 2));
-        
         double result = 0;
         result = calc.addition(4.1, calc.multiplication(15, 7));
         result = calc.addition(result, calc.powerDouble(
