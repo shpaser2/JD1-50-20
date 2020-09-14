@@ -1,9 +1,10 @@
 
 package homework3;
 
-import java.util.ArrayList;
 
-public class CalculatorWithOperator {
+public class CalculatorWithMathExtends extends CalculatorWithOperator
+        implements Calculator {
+    
     
     //4 метода (деления, умножение, вычитание, сложение) каждый из этих
     // методов должен принимать два параметра (определитесь с их типами)
@@ -36,47 +37,21 @@ public class CalculatorWithOperator {
     // Использование библиотеки Math ЗАПРЕЩЕНО!.
     
     //3.1.2
+    @Override
     public double powerDouble(double number, int power) {
-        while (power > 1) {
-            number *= number;
-            power--;
-        }
-        return number;
+        return Math.pow(number, power);
     }
     
+    @Override
     public double absoluteValue(double value) {
-        return value > 0? value : -value;
+        return Math.abs(value);
     }
     
+    @Override
     public int squareRoot(int value) {
-        ArrayList<Integer> arrList = new ArrayList<Integer>();
-        
-        while (value % 100 > 0) {
-            arrList.add(value % 100);
-            value /= 100;
-        }
-    
-        int remainder = 0;
-        int result = 0;
-        for (int index = arrList.size() - 1; index >= 0; index--) {
-            remainder = remainder * 100 + arrList.get(index);
-            int numberX = 0;
-            for (int i = 1; i < 10; i++) {
-                int buffer = ((result * 2) * 10 + i) * i;
-                int diff = remainder - buffer;
-                if (diff < 0 || i == 9) {
-                    if (diff < 0) {
-                        numberX = i - 1;
-                    } else if (i == 9) {
-                        numberX = i;
-                    }
-                    remainder -= ((result * 2) * 10 + numberX) * numberX;
-                    result = result * 10 + numberX;
-                    break;
-                }
-            }
-        }
-        
-        return result;
+        return (int)Math.sqrt(value);
     }
+
+
+    
 }

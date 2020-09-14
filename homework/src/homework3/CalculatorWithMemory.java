@@ -1,7 +1,8 @@
 package homework3;
 
-public class CalculatorWithCounter implements Calculator {
+public class CalculatorWithMemory implements Calculator {
     private int counter = 0;
+    private double memory = 0;
     private Calculator calc;
     
     
@@ -37,7 +38,7 @@ public class CalculatorWithCounter implements Calculator {
     
     public double absoluteValue(double value) {
         this.counter++;
-         return calc.absoluteValue(value);
+        return calc.absoluteValue(value);
     }
     
     
@@ -47,12 +48,24 @@ public class CalculatorWithCounter implements Calculator {
     }
     
     
-    public CalculatorWithCounter(Calculator calc) {
+    public CalculatorWithMemory(Calculator calc) {
         this.calc = calc;
     }
     
     
     public int getCountOperation() {
         return this.counter;
+    }
+    
+    
+    public double getMemory() {
+        double buffer = this.memory;
+        setMemory(0);
+        return buffer;
+    }
+    
+    
+    public void setMemory(double memory) {
+        this.memory = memory;
     }
 }
