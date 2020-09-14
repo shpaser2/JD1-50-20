@@ -1,17 +1,81 @@
+/*
+ * Сергей Шпаковский
+ *
+ * Это программное обеспечение является публичной и открытой
+ * информацией.
+ *
+ * АВТОР НЕ ДАЁТ НИКАКИХ ГАРАНТИЙ, ЯВНЫХ ИЛИ КОСВЕННЫХ (ВКЛЮЧАЯ - НО
+ * НЕ ОГРАНИЧИВАЯСЬ ИМИ - ГАРАНТИИ РЕАЛИЗУЕМОСТИ), СООТВЕТСТВИЯ
+ * ОПРЕДЕЛЁННОМУ НАЗНАЧЕНИЮ ИЛИ НЕНАРУШЕНИЯ УСЛОВИЙ, ЧТО СОДЕРЖИМОЕ
+ * ДАННОГО ФАЙЛА ПОДХОДИТ ДЛЯ КАКИХ-ЛИБО ЦЕЛЕЙ ИЛИ ЧТО ЛЮБОЕ
+ * ИСПОЛЬЗОВАНИЕ ИЛИ РЕАЛИЗАЦИЯ ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ
+ * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
+ * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
+ */
 package homework3;
 
+/**
+ * Интерфейс общих методов для калькуляторов.
+ * Используется для упрощения использования классов калькуляторов
+ * классами CalculatorWithCounter и CalculatorWithMemory.
+ *
+ * @version   1.00 14.09.2020
+ * @author    Сергей Шпаковский
+ */
 public interface Calculator {
     
-    public double division(double dividend, double divider);
+    /**
+     * Деление числа на число
+     * @param dividend делимое
+     * @param divider делитель
+     * @return результат деления делимого на делитель
+     */
+    double division(double dividend, double divider);
     
-    public double multiplication(double factorOne, int factorTwo);
+    /**
+     * Умножение числа на чило
+     * @param factorOne первый множитель
+     * @param factorTwo второй множитель
+     * @return произведение множителей
+     */
+    double multiplication(double factorOne, int factorTwo);
     
-    public double subtraction(double minuend, double subtrahend);
+    /**
+     * Нахождение разности двух чисел.
+     * @param minuend  уменьшаемое
+     * @param subtrahend  вычитаемое
+     * @return  разность уменьшаемого и вычитаемого
+     */
+    double subtraction(double minuend, double subtrahend);
     
-    public double addition(double numberOne, double numberTwo);
-    public double powerDouble(double number, int power);
+    /**
+     * Сложение двух чисел.
+     * @param numberOne первое слагаемое
+     * @param numberTwo второе слагаемое
+     * @return сумма слагаемых
+     */
+    double addition(double numberOne, double numberTwo);
     
-    public double absoluteValue(double value);
+    /**
+     * Возведение в целую степень дробного числа.
+     * @param number дробное или целое число
+     * @param power целочисленная степень
+     * @return  результат возведения в степень
+     */
+    double powerDouble(double number, int power);
     
-    public int squareRoot(int value);
+    /**
+     * Нахождение модуля от числа.
+     * @param value дробное число.
+     * @return неотрицательное дробное число.
+     */
+    double absoluteValue(double value);
+    
+    /**
+     * Нахождение квадратного корня из целого числа.
+     * @param value целое неотрицательное число
+     * @return целое число, квадрат которого
+     * меньше или равен числу-параметру.
+     */
+    int squareRoot(int value);
 }

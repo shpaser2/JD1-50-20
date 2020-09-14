@@ -1,41 +1,77 @@
-
+/*
+ * Сергей Шпаковский
+ *
+ * Это программное обеспечение является публичной и открытой
+ * информацией.
+ *
+ * АВТОР НЕ ДАЁТ НИКАКИХ ГАРАНТИЙ, ЯВНЫХ ИЛИ КОСВЕННЫХ (ВКЛЮЧАЯ - НО
+ * НЕ ОГРАНИЧИВАЯСЬ ИМИ - ГАРАНТИИ РЕАЛИЗУЕМОСТИ), СООТВЕТСТВИЯ
+ * ОПРЕДЕЛЁННОМУ НАЗНАЧЕНИЮ ИЛИ НЕНАРУШЕНИЯ УСЛОВИЙ, ЧТО СОДЕРЖИМОЕ
+ * ДАННОГО ФАЙЛА ПОДХОДИТ ДЛЯ КАКИХ-ЛИБО ЦЕЛЕЙ ИЛИ ЧТО ЛЮБОЕ
+ * ИСПОЛЬЗОВАНИЕ ИЛИ РЕАЛИЗАЦИЯ ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ
+ * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
+ * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
+ */
 package homework3;
 
 import java.util.ArrayList;
 
-public class CalculatorWithOperator  implements Calculator {
+/**
+ * Класс простого калькулятора с использованием операторов ^/+-*
+ * и функциями извлечения квадратного корня и возведения в степень,
+ * нахождения модуля числа.
+ *
+ * @version   1.00 14.09.2020
+ * @author    Сергей Шпаковский
+ */
+public class CalculatorWithOperator implements Calculator {
     
-    //4 метода (деления, умножение, вычитание, сложение) каждый из этих
-    // методов должен принимать два параметра (определитесь с их типами)
-    // и должны возвращать результать
-    // (определиться с возвращаемым типом результата)
-    // при помощи ключевого слово return.
-    
-    //3.1.1
+    /**
+     * Деление числа на число
+     * @param dividend делимое
+     * @param divider делитель
+     * @return результат деления делимого на делитель
+     */
     public double division(double dividend, double divider) {
         return dividend / divider;
     }
     
+    /**
+     * Умножение числа на чило
+     * @param factorOne первый множитель
+     * @param factorTwo второй множитель
+     * @return произведение множителей
+     */
     public double multiplication(double factorOne, int factorTwo) {
         return factorOne * factorTwo;
     }
     
+    /**
+     * Нахождение разности двух чисел.
+     * @param minuend  уменьшаемое
+     * @param subtrahend  вычитаемое
+     * @return  разность уменьшаемого и вычитаемого
+     */
     public double subtraction(double minuend, double subtrahend) {
         return minuend - subtrahend;
     }
     
+    /**
+     * Сложение двух чисел.
+     * @param numberOne первое слагаемое
+     * @param numberTwo второе слагаемое
+     * @return сумма слагаемых
+     */
     public double addition(double numberOne, double numberTwo) {
         return numberOne + numberTwo;
     }
-    //end 3.1.1
     
-    //1.2 Также должно быть ещё 2-3 метода
-    // (Возведение в степень дробного положительного числа в целую степень,
-    // Модуль числа, Корень из числа**).
-    // В методах можно использовать оператор + / * -.
-    // Использование библиотеки Math ЗАПРЕЩЕНО!.
-    
-    //3.1.2
+    /**
+     * Возведение в целую степень дробного числа.
+     * @param number дробное или целое число
+     * @param power целочисленная степень
+     * @return  результат возведения в степень
+     */
     public double powerDouble(double number, int power) {
         while (power > 1) {
             number *= number;
@@ -44,10 +80,25 @@ public class CalculatorWithOperator  implements Calculator {
         return number;
     }
     
+    /**
+     * Нахождение модуля от числа.
+     * @param value дробное число.
+     * @return неотрицательное дробное число.
+     */
     public double absoluteValue(double value) {
         return value > 0? value : -value;
     }
     
+    /**
+     * Нахождение квадратного корня из целого числа
+     * алгоритмом разделения числа на группы по две цифры.
+     * Так называемое нахождение корня в столбик.
+     * Можно улучшить и доабвить задание точности вычисления
+     * - количество знаков после запятой, если результат не целый.
+     * @param value целое неотрицательное число
+     * @return целое число, квадрат которого
+     * меньше или равен числу-параметру.
+     */
     public int squareRoot(int value) {
         ArrayList<Integer> arrList = new ArrayList<Integer>();
         
@@ -76,7 +127,6 @@ public class CalculatorWithOperator  implements Calculator {
                 }
             }
         }
-        
         return result;
     }
 }

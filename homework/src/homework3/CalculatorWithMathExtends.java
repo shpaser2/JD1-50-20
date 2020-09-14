@@ -1,57 +1,59 @@
-
+/*
+ * Сергей Шпаковский
+ *
+ * Это программное обеспечение является публичной и открытой
+ * информацией.
+ *
+ * АВТОР НЕ ДАЁТ НИКАКИХ ГАРАНТИЙ, ЯВНЫХ ИЛИ КОСВЕННЫХ (ВКЛЮЧАЯ - НО
+ * НЕ ОГРАНИЧИВАЯСЬ ИМИ - ГАРАНТИИ РЕАЛИЗУЕМОСТИ), СООТВЕТСТВИЯ
+ * ОПРЕДЕЛЁННОМУ НАЗНАЧЕНИЮ ИЛИ НЕНАРУШЕНИЯ УСЛОВИЙ, ЧТО СОДЕРЖИМОЕ
+ * ДАННОГО ФАЙЛА ПОДХОДИТ ДЛЯ КАКИХ-ЛИБО ЦЕЛЕЙ ИЛИ ЧТО ЛЮБОЕ
+ * ИСПОЛЬЗОВАНИЕ ИЛИ РЕАЛИЗАЦИЯ ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ
+ * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
+ * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
+ */
 package homework3;
 
-
+/**
+ * Класс калькулятора с наследованием от калькулятора на операторах
+ * ^/+-* и переопределением функций извлечения квадратного корня,
+ * возведения в степень и нахождения модуля числа.
+ *
+ * @version   1.00 14.09.2020
+ * @author    Сергей Шпаковский
+ */
 public class CalculatorWithMathExtends extends CalculatorWithOperator
         implements Calculator {
     
-    
-    //4 метода (деления, умножение, вычитание, сложение) каждый из этих
-    // методов должен принимать два параметра (определитесь с их типами)
-    // и должны возвращать результать
-    // (определиться с возвращаемым типом результата)
-    // при помощи ключевого слово return.
-    
-    //3.1.1
-    public double division(double dividend, double divider) {
-        return dividend / divider;
-    }
-    
-    public double multiplication(double factorOne, int factorTwo) {
-        return factorOne * factorTwo;
-    }
-    
-    public double subtraction(double minuend, double subtrahend) {
-        return minuend - subtrahend;
-    }
-    
-    public double addition(double numberOne, double numberTwo) {
-        return numberOne + numberTwo;
-    }
-    //end 3.1.1
-    
-    //1.2 Также должно быть ещё 2-3 метода
-    // (Возведение в степень дробного положительного числа в целую степень,
-    // Модуль числа, Корень из числа**).
-    // В методах можно использовать оператор + / * -.
-    // Использование библиотеки Math ЗАПРЕЩЕНО!.
-    
-    //3.1.2
+    /**
+     * Возведение в целую степень дробного числа.
+     * @param number дробное или целое число
+     * @param power целочисленная степень
+     * @return  результат возведения в степень
+     */
     @Override
     public double powerDouble(double number, int power) {
         return Math.pow(number, power);
     }
     
+    /**
+     * Нахождение модуля от числа.
+     * @param value дробное число.
+     * @return неотрицательное дробное число.
+     */
     @Override
     public double absoluteValue(double value) {
         return Math.abs(value);
     }
     
+    /**
+     * Нахождение квадратного корня из целого числа.
+     * @param value целое неотрицательное число
+     * @return целое число, квадрат которого
+     * меньше или равен числу-параметру.
+     */
     @Override
     public int squareRoot(int value) {
         return (int)Math.sqrt(value);
     }
-
-
-    
 }
