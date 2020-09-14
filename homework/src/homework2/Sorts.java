@@ -29,7 +29,7 @@ public class Sorts {
      * Пузырьковая сортировка целочисленного массива.
      * @param arr целочисленный массив для сортировки
      */
-    private static void bubbleSort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         for (int maxUnsortedIndex = arr.length - 1;
              maxUnsortedIndex > 0;
              maxUnsortedIndex--) {
@@ -45,7 +45,7 @@ public class Sorts {
      * Шейкерная сортировка для int[].
      * @param arr целочисленный массив для сортировки.
      */
-    private static void shakeSort(int[] arr) {
+    public static void shakeSort(int[] arr) {
         int minUnsInd = 0;
         int maxUnsInd = arr.length - 1;
         boolean swapUp;
