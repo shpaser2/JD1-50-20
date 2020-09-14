@@ -69,4 +69,17 @@ public class Sorts {
             minUnsInd++;
         } while (swapUp || swapDown);
     }
+    
+    /**
+     * Метод меняющий два любых элемента массива местами.
+     * @param arr массив для действий
+     * @param a индекс элемента для замены элементом с индексом b
+     * @param b индекс другого элемента для замены с индексом a
+     */
+    private static void swapElements(int[] arr, int a, int b) {
+        int buf;
+        buf = arr[a];
+        arr[a] = arr[b];
+        arr[b] = buf;
+    }
 }
