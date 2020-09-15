@@ -24,6 +24,11 @@ package homework3;
  */
 public class CalculatorMain {
     
+    /**
+     * Точка входа и проверка созданных калькуляторов
+     * разными входными данными.
+     * @param args строки аргументов
+     */
     public static void main(String[] args) {
         CalculatorMain calcM = new CalculatorMain();
         CalculatorWithOperator calc = new CalculatorWithOperator();
@@ -49,8 +54,7 @@ public class CalculatorMain {
         System.out.println(calc2.getCountOperation());
         calcM.test(calc3);
         System.out.println(calc3.getCountOperation());
-    
-    
+        
         System.out.println("CalculatorWithMemory "
                 + "result and operations counter");
         CalculatorWithMemory calcWithMem =
@@ -65,6 +69,11 @@ public class CalculatorMain {
         System.out.println(calcWithMem.getCountOperation());
     }
     
+    /**
+     * Тестирование всех калькуляторов пакета
+     * кроме CalculatorWithCounter.
+     * @param calc экземпляр калькулятора для вычислений
+     */
     public void test(Calculator calc) {
         System.out.println(calc.getClass().getSimpleName()
                 + " result and operations counter");
@@ -89,6 +98,10 @@ public class CalculatorMain {
         System.out.println(calc.division(result, 0.0d));
     }
     
+    /**
+     * Тестирование всех калькуляторов типа CalculatorWithCounter.
+     * @param calc экземпляр калькулятора для вычислений
+     */
     public void test(CalculatorWithCounter calc) {
         System.out.print("CalculatorWithCounter uses ");
         System.out.println(calc.getCalc().getClass().getSimpleName());
