@@ -64,18 +64,14 @@ public class CalculatorMain {
      * @param calc экземпляр калькулятора для вычислений
      */
     public void test(Calculator calc) {
-        System.out.println(calc.getClass().getSimpleName()
-                + " result and operations counter");
-        
-        System.out.println(calc.squareRoot(343396));
-        System.out.println(calc.squareRoot(998001));
-        System.out.println(calc.squareRoot(28699));
-        System.out.println(calc.absoluteValue(-10));
-        System.out.println(calc.absoluteValue(10));
-        System.out.println(calc.powerDouble(1.5, 2));
-        System.out.println(calc.powerDouble(-1.5, 2));
-        System.out.println(calc.powerDouble(5, 2));
-        
+        System.out.println(calc.getClass().getSimpleName());
+//        System.out.println(calc.squareRoot(998001));
+//        System.out.println(calc.squareRoot(28699));
+//        System.out.println(calc.absoluteValue(-10));
+//        System.out.println(calc.absoluteValue(10));
+//        System.out.println(calc.powerDouble(1.5, 2));
+//        System.out.println(calc.powerDouble(-1.5, 3));
+//        System.out.println(calc.powerDouble(5, 2));
         double result = 0;
         result = calc.addition(4.1, calc.multiplication(15, 7));
         result = calc.addition(result, calc.powerDouble(
@@ -94,17 +90,8 @@ public class CalculatorMain {
      */
     public void test(CalculatorWithCounter calc) {
         System.out.print("CalculatorWithCounter uses ");
-        System.out.println(calc.getCalc().getClass().getSimpleName());
-        
-        //3.1.1, 3.1.2
-        System.out.println(calc.squareRoot(343396));
-        System.out.println(calc.squareRoot(998001));
-        System.out.println(calc.squareRoot(28699));
-        System.out.println(calc.absoluteValue(-10));
-        System.out.println(calc.absoluteValue(10));
-        System.out.println(calc.powerDouble(1.5, 2));
-        System.out.println(calc.powerDouble(-1.5, 2));
-        System.out.println(calc.powerDouble(5, 2));
+        System.out.println(calc.getCalc().getClass().getSimpleName()
+                + " \n result and operations counter");
         double result = 0;
         result = calc.addition(4.1, calc.multiplication(15, 7));
         result = calc.addition(result, calc.powerDouble(

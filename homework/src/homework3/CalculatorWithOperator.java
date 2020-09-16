@@ -90,31 +90,39 @@ public class CalculatorWithOperator implements Calculator {
     }
     
     /**
-     * Нахождение квадратного корня из числа
-     * алгоритмом разделения числа на группы по две цифры.
-     * Так называемое нахождение корня в столбик.
-     * Можно улучшить и доабвить задание точности вычисления
-     * - количество знаков после запятой, если результат не целый.
+     * Нахождение квадратного корня из числа.
+     * Точность задана в три цифры после запятой.
+     *
+     * Алгоритмом разделения числа на группы по две цифры,
+     * "нахождение корня в столбик".
+     *
      * @param value неотрицательное число
      * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
     public double squareRoot(double value) {
-        ArrayList<Double> arrList = new ArrayList<Double>();
-        
-        while (value % 100 > 0) {
-            arrList.add(value % 100);
-            value /= 100;
+        ArrayList<Integer> arrList = new ArrayList<Integer>();
+        int integerPart = (int)value;
+        double floatPart = value % 1;
+        //3 pairs of digits after dot
+        floatPart *= 10E6;
+        for (int i = 0; i < 3; i++) {
+            arrList.add((int)(floatPart % 100));
+            floatPart /= 100;
         }
-    
-        double remainder = 0;
-        int result = 0;
+        //and integer part
+        while (integerPart % 100 > 0) {
+            arrList.add(integerPart % 100);
+            integerPart /= 100;
+        }
+        long remainder = 0;
+        long result = 0;
         for (int index = arrList.size() - 1; index >= 0; index--) {
             remainder = remainder * 100 + arrList.get(index);
             int numberX = 0;
             for (int i = 1; i < 10; i++) {
-                int buffer = ((result * 2) * 10 + i) * i;
-                double diff = remainder - buffer;
+                long buffer = ((result * 2) * 10 + i) * i;
+                long diff = remainder - buffer;
                 if (diff < 0 || i == 9) {
                     if (diff < 0) {
                         numberX = i - 1;
@@ -127,6 +135,6 @@ public class CalculatorWithOperator implements Calculator {
                 }
             }
         }
-        return result;
+        return ((double)result / 1000);
     }
 }
