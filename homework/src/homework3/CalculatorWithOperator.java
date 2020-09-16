@@ -90,31 +90,31 @@ public class CalculatorWithOperator implements Calculator {
     }
     
     /**
-     * Нахождение квадратного корня из целого числа
+     * Нахождение квадратного корня из числа
      * алгоритмом разделения числа на группы по две цифры.
      * Так называемое нахождение корня в столбик.
      * Можно улучшить и доабвить задание точности вычисления
      * - количество знаков после запятой, если результат не целый.
-     * @param value целое неотрицательное число
-     * @return целое число, квадрат которого
+     * @param value неотрицательное число
+     * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
-    public int squareRoot(int value) {
-        ArrayList<Integer> arrList = new ArrayList<Integer>();
+    public double squareRoot(double value) {
+        ArrayList<Double> arrList = new ArrayList<Double>();
         
         while (value % 100 > 0) {
             arrList.add(value % 100);
             value /= 100;
         }
     
-        int remainder = 0;
+        double remainder = 0;
         int result = 0;
         for (int index = arrList.size() - 1; index >= 0; index--) {
             remainder = remainder * 100 + arrList.get(index);
             int numberX = 0;
             for (int i = 1; i < 10; i++) {
                 int buffer = ((result * 2) * 10 + i) * i;
-                int diff = remainder - buffer;
+                double diff = remainder - buffer;
                 if (diff < 0 || i == 9) {
                     if (diff < 0) {
                         numberX = i - 1;

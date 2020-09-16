@@ -34,7 +34,7 @@ public class CalculatorMain {
         CalculatorWithOperator calc = new CalculatorWithOperator();
         calcM.test(calc);
     
-        CalculatorWithOperatorCopy calcCopy = new CalculatorWithOperatorCopy();
+        CalculatorWithMathCopy calcCopy = new CalculatorWithMathCopy();
         calcM.test(calcCopy);
         
         CalculatorWithMathExtends calcWithMath =
@@ -44,7 +44,7 @@ public class CalculatorMain {
         CalculatorWithCounter calc1 =
                 new CalculatorWithCounter(new CalculatorWithOperator());
         CalculatorWithCounter calc2 =
-                new CalculatorWithCounter(new CalculatorWithOperatorCopy());
+                new CalculatorWithCounter(new CalculatorWithMathCopy());
         CalculatorWithCounter calc3 =
                 new CalculatorWithCounter(new CalculatorWithMathExtends());
         
@@ -55,18 +55,7 @@ public class CalculatorMain {
         calcM.test(calc3);
         System.out.println(calc3.getCountOperation());
         
-        System.out.println("CalculatorWithMemory "
-                + "result and operations counter");
-        CalculatorWithMemory calcWithMem =
-                new CalculatorWithMemory(new CalculatorWithMathExtends());
-        calcWithMem.setMemory(
-                calcWithMem.powerDouble(calcWithMem.division(28, 5),2));
-        calcWithMem.setMemory(calcWithMem.addition(calcWithMem.getMemory(),
-                calcWithMem.multiplication(15, 7)));
-        calcWithMem.setMemory(
-                calcWithMem.addition(4.1, calcWithMem.getMemory()));
-        System.out.println(calcWithMem.getMemory());
-        System.out.println(calcWithMem.getCountOperation());
+        calcM.testCalcWithMemory();
     }
     
     /**
@@ -96,6 +85,7 @@ public class CalculatorMain {
         System.out.println(calc.division(result, 0));
         //3.2.2
         System.out.println(calc.division(result, 0.0d));
+        
     }
     
     /**
@@ -124,5 +114,26 @@ public class CalculatorMain {
         System.out.println(calc.division(result, 0));
         //3.2.2
         System.out.println(calc.division(result, 0.0d));
+    }
+    
+    /**
+     * Вычисление выражения  "4.1 + 15 * 7 + (28 / 5) ^ 2"
+     * с исползованием функции сохранения в память
+     * результата последнего вычисления.
+     */
+    public void testCalcWithMemory() {
+        System.out.println("CalculatorWithMemory "
+                + "result and operations counter");
+        CalculatorWithMemory calcWithMem =
+                new CalculatorWithMemory(new CalculatorWithMathExtends());
+        calcWithMem.powerDouble(calcWithMem.division(28, 5),2);
+        calcWithMem.saveLastResult();
+        calcWithMem.addition(calcWithMem.getMemory(),
+                calcWithMem.multiplication(15, 7));
+        calcWithMem.saveLastResult();
+        calcWithMem.addition(4.1, calcWithMem.getMemory());
+        calcWithMem.saveLastResult();
+        System.out.println(calcWithMem.getMemory());
+        System.out.println(calcWithMem.getCountOperation());
     }
 }

@@ -99,13 +99,12 @@ public class CalculatorWithCounter implements Calculator {
     }
     
     /**
-     * Нахождение квадратного корня из целого числа
-     * с увеличением счётчика выполненных операций.
-     * @param value целое неотрицательное число
-     * @return целое число, квадрат которого
+     * Нахождение квадратного корня из числа.
+     * @param value неотрицательное число
+     * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
-    public int squareRoot(int value) {
+    public double squareRoot(double value) {
         this.counter++;
         return calc.squareRoot(value);
     }

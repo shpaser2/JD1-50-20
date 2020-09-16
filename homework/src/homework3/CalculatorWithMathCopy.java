@@ -22,7 +22,7 @@ package homework3;
  * @version   1.00 14.09.2020
  * @author    Сергей Шпаковский
  */
-public class CalculatorWithOperatorCopy implements Calculator{
+public class CalculatorWithMathCopy implements Calculator {
     
     /**
      * Деление числа на число
@@ -85,13 +85,12 @@ public class CalculatorWithOperatorCopy implements Calculator{
     }
     
     /**
-     * Нахождение квадратного корня из целого числа c использованием
-     * библиотеки Math.
-     * @param value целое неотрицательное число
-     * @return целое число, квадрат которого
+     * Нахождение квадратного корня из числа.
+     * @param value неотрицательное число
+     * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
-    public int squareRoot(int value) {
-        return (int)Math.sqrt(value);
+    public double squareRoot(double value) {
+        return Math.sqrt(value);
     }
 }

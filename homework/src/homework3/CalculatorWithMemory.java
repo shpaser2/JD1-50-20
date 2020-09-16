@@ -28,6 +28,7 @@ package homework3;
 public class CalculatorWithMemory implements Calculator {
     private int counter = 0;
     private double memory = 0;
+    private double result = 0;
     private Calculator calc;
     
     /**
@@ -39,7 +40,8 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double division(double dividend, double divider) {
         this.counter++;
-        return calc.division(dividend, divider);
+        this.result = calc.division(dividend, divider);
+        return this.result;
     }
     
     /**
@@ -51,7 +53,8 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double multiplication(double factorOne, int factorTwo) {
         this.counter++;
-        return calc.multiplication(factorOne, factorTwo);
+        this.result = calc.multiplication(factorOne, factorTwo);
+        return this.result;
     }
     
     /**
@@ -63,7 +66,8 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double subtraction(double minuend, double subtrahend) {
         this.counter++;
-        return calc.subtraction(minuend, subtrahend);
+        this.result = calc.subtraction(minuend, subtrahend);
+        return this.result;
     }
     
     /**
@@ -75,7 +79,8 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double addition(double numberOne, double numberTwo) {
         this.counter++;
-        return calc.addition(numberOne, numberTwo);
+        this.result = calc.addition(numberOne, numberTwo);
+        return this.result;
     }
     
     /**
@@ -87,7 +92,8 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double powerDouble(double number, int power) {
         this.counter++;
-        return calc.powerDouble(number, power);
+        this.result = calc.powerDouble(number, power);
+        return this.result;
     }
     
     /**
@@ -98,19 +104,20 @@ public class CalculatorWithMemory implements Calculator {
      */
     public double absoluteValue(double value) {
         this.counter++;
-        return calc.absoluteValue(value);
+        this.result = calc.absoluteValue(value);
+        return this.result;
     }
     
     /**
-     * Нахождение квадратного корня из целого числа
-     * с увеличением счётчика выполненных операций.
-     * @param value целое неотрицательное число.
-     * @return целое число, квадрат которого
+     * Нахождение квадратного корня из числа.
+     * @param value неотрицательное число
+     * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
-    public int squareRoot(int value) {
+    public double squareRoot(double value) {
         this.counter++;
-        return calc.squareRoot(value);
+        this.result = calc.squareRoot(value);
+        return this.result;
     }
     
     /**
@@ -147,5 +154,13 @@ public class CalculatorWithMemory implements Calculator {
      */
     public void setMemory(double memory) {
         this.memory = memory;
+    }
+    
+    /**
+     * Сохраняет в памяти результат выполнения последней операции
+     * или сохраняет ноль, если небыло действий.
+     */
+    public void saveLastResult() {
+        this.memory = this.result;
     }
 }

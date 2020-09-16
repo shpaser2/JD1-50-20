@@ -47,13 +47,13 @@ public class CalculatorWithMathExtends extends CalculatorWithOperator
     }
     
     /**
-     * Нахождение квадратного корня из целого числа.
-     * @param value целое неотрицательное число
-     * @return целое число, квадрат которого
+     * Нахождение квадратного корня из числа.
+     * @param value неотрицательное число
+     * @return число, квадрат которого
      * меньше или равен числу-параметру.
      */
     @Override
-    public int squareRoot(int value) {
-        return (int)Math.sqrt(value);
+    public double squareRoot(double value) {
+        return Math.sqrt(value);
     }
 }
