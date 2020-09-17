@@ -2,7 +2,7 @@ package oop;
 
 import oop.ETypeMan;
 
-public class Man {
+public class Man implements Comparable<Man>{
     private String name;
     private int hairLength;
     private int yearOld;
@@ -59,5 +59,10 @@ public class Man {
 
     public String toString() {
         return "Имя : " + this.name + ", Длинна волос : " + this.hairLength;
+    }
+
+    @Override
+    public int compareTo(Man o) {
+        return this.hairLength - o.hairLength;
     }
 }
