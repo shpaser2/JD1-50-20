@@ -23,9 +23,10 @@ import java.util.regex.Pattern;
  * This class can calc mathematical expression in string
  * and show the result in double.
  * Acceptable operators - * / + - and ( ).
+ * Acceptable constants - PI, E.
  * Numbers - any not negative integer or float.
  *
- * @version   0.8 16.09.2020
+ * @version   0.9 16.09.2020
  * @author    Сергей Шпаковский
  */
 public class StringCalc {
@@ -40,13 +41,68 @@ public class StringCalc {
         Scanner input = new Scanner(System.in);
         System.out.println("Введите выражение: ");
 //        String str = "(123*(33.456*123+5*9*6*2-23.4566))/10+PI^25";
-        // PI, E, | |, ^ - not works now.
+        //  | |, ^ - not works now.
 //        String str = "(2*(0.5*1+5*1*6-25.5))/10+25"; //this works
         String str = input.nextLine();
+        //str -> char array -> replace in char array PI by 3.142 ->
+        //-> replace in char array E by 2.718 -> char array back to str
+        str = str.replaceAll("\\s+","");
+        ArrayList<Character> charList = StringCalc.stringToCharacterList(str);
+    
+        for (int i = 0; i < charList.size() - 1; i++) {
+            if (charList.get(i).equals('P') && charList.get(i + 1).equals('I')) {
+                StringCalc.insertPI(charList, i);
+            }
+        }
+        for (int i = 0; i < charList.size() - 1; i++) {
+            if (charList.get(i).equals('E')) {
+                StringCalc.insertE(charList, i);
+            }
+        }
+        str = StringCalc.getStringFromCharacterList(charList);
         ArrayList<String> arrStr = strCalc.parseEquation(str);
         strCalc.calcAll(arrStr);
         System.out.println("Result: ");
         strCalc.print(arrStr);
+    }
+    
+    private static String getStringFromCharacterList(
+            ArrayList<Character> list) {
+        StringBuilder builder = new StringBuilder(list.size());
+        for (Character ch: list) {
+            builder.append(ch);
+        }
+        return builder.toString();
+    }
+    
+    private static void insertPI(ArrayList<Character> charList,
+                                 int startIndex) {
+        charList.set(startIndex, '3');
+        charList.set(startIndex + 1, '.');
+        charList.add(startIndex + 2, '1');
+        charList.add(startIndex + 3, '4');
+        charList.add(startIndex + 4, '2');
+    }
+    
+    private static void insertE(ArrayList<Character> charList,
+                                 int startIndex) {
+        charList.set(startIndex, '2');
+        charList.add(startIndex + 1, '.');
+        charList.add(startIndex + 2, '7');
+        charList.add(startIndex + 3, '1');
+        charList.add(startIndex + 4, '8');
+    }
+    
+    private static ArrayList<Character> stringToCharacterList(String str) {
+        if ( str == null ) {
+            return null;
+        }
+        int len = str.length();
+        ArrayList<Character> array = new ArrayList<>(len);
+        for (int i = 0; i < len ; i++) {
+            array.add(str.charAt(i));
+        }
+        return array;
     }
     
     /**
@@ -72,7 +128,7 @@ public class StringCalc {
         ArrayList<String> arrStr = new ArrayList<>();
         Scanner buf = new Scanner(str);
         Pattern pattern = Pattern.compile(
-                "[\\d]+\\.?[\\d]*|\\||\\+|-|\\*|/|\\^|PI|[)]|[(]|E");
+                "[\\d]+\\.?[\\d]*|\\+|-|\\*|/|[)]|[(]");
         String result;
         do {
             result = buf.findInLine(pattern);
