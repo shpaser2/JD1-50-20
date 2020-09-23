@@ -1,8 +1,30 @@
+/*
+ * Сергей Шпаковский
+ *
+ * Это программное обеспечение является публичной и открытой
+ * информацией.
+ *
+ * АВТОР НЕ ДАЁТ НИКАКИХ ГАРАНТИЙ, ЯВНЫХ ИЛИ КОСВЕННЫХ (ВКЛЮЧАЯ - НО
+ * НЕ ОГРАНИЧИВАЯСЬ ИМИ - ГАРАНТИИ РЕАЛИЗУЕМОСТИ), СООТВЕТСТВИЯ
+ * ОПРЕДЕЛЁННОМУ НАЗНАЧЕНИЮ ИЛИ НЕНАРУШЕНИЯ УСЛОВИЙ, ЧТО СОДЕРЖИМОЕ
+ * ДАННОГО ФАЙЛА ПОДХОДИТ ДЛЯ КАКИХ-ЛИБО ЦЕЛЕЙ ИЛИ ЧТО ЛЮБОЕ
+ * ИСПОЛЬЗОВАНИЕ ИЛИ РЕАЛИЗАЦИЯ ТАКОГО СОДЕРЖИМОГО НЕ БУДЕТ НАРУШАТЬ
+ * КАКИХ-ЛИБО ПАТЕНТОВ ТРЕТЬЕЙ СТОРОНЫ, АВТОРСКИХ ПРАВ, КОММЕРЧЕСКОЙ
+ * ТАЙНЫ ИЛИ ИНЫХ ПРАВ.
+ */
 package homework4;
 
-import java.util.Arrays;
-
+/**
+ *  Класс демонстрации функционала
+ *  и проверки работы объекта-контейнера.
+ */
 public class DataContainerMain {
+    
+    /**
+     * Здесь проверяются методы
+     * объектов-контейнеров класса DataContainer.
+     * @param args параметры передаваемые при запуске программы.
+     */
     public static void main(String[] args) {
         DataContainer<Integer> numbers = new DataContainer<>();
         numbers.add(12);
@@ -19,17 +41,11 @@ public class DataContainerMain {
 
         numbers.add(17);
         System.out.println(numbers.delete((Integer) 20));
-        System.out.println(numbers.delete((Integer) 12));
+        System.out.println(numbers.delete(Integer.valueOf(12)));
 
         numbers.print();
-
-
-//        Integer ig = 10;
-//        Object obj = (Object)ig;
-//        Integer ig1 = (Integer) obj;
-//        System.out.println(((Integer)obj).doubleValue());
-//        System.out.println(ig1.doubleValue());
+        
+        //TODO: add examples with sort, toString, get, getItems,
+        // sort with comparator, sort with "... extends comarable".
     }
-
-
 }
