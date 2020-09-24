@@ -4,14 +4,16 @@ import collections.dto.Passport;
 
 import java.util.*;
 
-public class MapBankStorage implements IBankStorage {
+public class MapBankStorageNew implements IBankStorage {
     private Map<String, Client> clients = new HashMap<>();
     private Map<String, List<Passport>> passports = new HashMap<>();
+    private List<Passport> allPassports = new LinkedList<>();
     
     @Override
     public void saveNewClient(Passport passport) {
         this.clients.put(passport.getId(), new Client(passport));
         this.passports.put(passport.getId(), Arrays.asList(passport));
+        this.allPassports.add(passport);
     }
     
     @Override
@@ -26,10 +28,6 @@ public class MapBankStorage implements IBankStorage {
     
     @Override
     public List<Passport> getPassports() {
-        List<Passport> tmp = new LinkedList<>();
-        for (List<Passport> value : this.passports.values()) {
-            tmp.addAll(value);
-        }
-        return tmp;
+        return allPassports;
     }
 }

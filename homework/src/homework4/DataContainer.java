@@ -164,7 +164,7 @@ public class DataContainer<T> {
      * @param <V>       обобщенный тип, который может отличаться
      *                      от типа класса.
      */
-    public static <V extends Comparable> void sort(DataContainer<V> container){
+    public static <V extends Comparable> void sort(DataContainer<V> container) {
         V tmp;
         for (int maxUnsortedIndex = container.arr.length - 1;
                  maxUnsortedIndex > 0;
@@ -188,7 +188,7 @@ public class DataContainer<T> {
      *                      от типа класса.
      */
     public static <V> void sort(DataContainer<V> container,
-                                Comparator<V> comparator){
+                                Comparator<V> comparator) {
         container.sort(comparator);
     }
 }

@@ -1,17 +1,20 @@
 package collections;
 
 import collections.dto.Passport;
-import collections.service.Bank;
-import collections.service.Client;
-import collections.service.Gender;
-import collections.service.MapBankStorage;
+import collections.service.*;
 
 import java.util.Date;
 import java.util.List;
 
 public class BankMain {
     public static void main(String[] args) {
-        Bank bank = new Bank(new MapBankStorage());
+        //better for less ROM usage (can be used
+        // when getAllPassports called seldom.
+//        Bank bank = new Bank(new MapBankStorage());
+        
+        //better for RAM when getAllPassports called often.
+        Bank bank = new Bank(new MapBankStorageNew());
+        
 //        //describe what you want to do with bank
 //        bank.saveNewClient(passport);
 //
