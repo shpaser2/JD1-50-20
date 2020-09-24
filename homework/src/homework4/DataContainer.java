@@ -14,6 +14,7 @@
  */
 package homework4;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -21,11 +22,11 @@ import java.util.Comparator;
  * Класс поясняющий работу ArrayList и обобщенные типы.
  * @param <T> обобщенный тип хранимых данных.
  *
- * @version 1.00 21.09.2020
+ * @version 2.00 21.09.2020
  * @author Сергей Шпаковский
  */
 public class DataContainer<T> {
-    private T[] arr = (T[]) new Object[]{};
+    private T[] arr;
     
     /**
      * Добавляет элемент в первую свободную ячейку массива.
@@ -35,6 +36,11 @@ public class DataContainer<T> {
      * @return      индек элемента в массиве.
      */
     public int add(T item) {
+        if (this.arr == null) {
+            @SuppressWarnings("unchecked")
+            T[] a = (T[]) Array.newInstance(item.getClass(), 1);
+            this.arr = a;
+        }
         int indexInsert = 0;
         for (; indexInsert < arr.length; indexInsert++) {
             if (arr[indexInsert] == null) {

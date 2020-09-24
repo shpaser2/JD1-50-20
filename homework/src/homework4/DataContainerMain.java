@@ -14,6 +14,8 @@
  */
 package homework4;
 
+import java.util.Arrays;
+
 /**
  *  Класс демонстрации функционала
  *  и проверки работы объекта-контейнера.
@@ -27,25 +29,38 @@ public class DataContainerMain {
      */
     public static void main(String[] args) {
         DataContainer<Integer> numbers = new DataContainer<>();
-        numbers.add(12);
-        numbers.add(13);
-        numbers.add(14);
+        System.out.println("check add: ");
         numbers.add(15);
-
+        numbers.add(99);
+        numbers.add(14);
+        numbers.add(13);
+        numbers.add(12);
         numbers.print();
-
+    
+        System.out.println("check delete by index 2 and 17: ");
         System.out.println(numbers.delete(2));
         System.out.println(numbers.delete(17));
-
         numbers.print();
-
-        numbers.add(17);
+    
+        System.out.println("check delete by value 20 and 12: ");
+        numbers.add(3);
         System.out.println(numbers.delete((Integer) 20));
         System.out.println(numbers.delete(Integer.valueOf(12)));
-
         numbers.print();
+    
+        System.out.println("check get: ");
+        System.out.println(numbers.get(3));
+        System.out.println("check getItem with Arrays.toString(): ");
+        System.out.println(Arrays.toString(numbers.getItems()));
         
-        //TODO: add examples with sort, toString, get, getItems,
-        // sort with comparator, sort with "... extends comarable".
+        System.out.println("check toString: ");
+        System.out.println(numbers.toString());
+        
+        System.out.println("check static sort with implemented Comparable "
+                + "inside <T> class: ");
+        DataContainer.sort(numbers);
+        System.out.println(numbers.toString());
+        
+        //TODO: add example sort with comparator
     }
 }
