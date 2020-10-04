@@ -78,6 +78,14 @@ public class WarAndPeace {
                     + "\t" + topWordsCount.get(keysWords.get(i)).toString()
                     + " раз");
         }
+        
+        EasySearch easySearch = new EasySearch();
+        System.out.println("Слово \"что\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "что") + " раз.");
+        System.out.println("Союз \"и\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "и") + " раз.");
+        System.out.println("Слово \"все\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "все") + " раз.");
     }
 
     private static String readAllBytesJava7(String filePath) {
