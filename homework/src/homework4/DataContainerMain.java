@@ -14,6 +14,9 @@
  */
 package homework4;
 
+import oop.Man;
+import oop.ManNameComparator;
+
 import java.util.Arrays;
 
 /**
@@ -60,7 +63,19 @@ public class DataContainerMain {
                 + "inside <T> class: ");
         DataContainer.sort(numbers);
         System.out.println(numbers.toString());
-        
-        //TODO: add example sort with comparator
+    
+        ManNameComparator manNameComparator = new ManNameComparator();
+        DataContainer<Man> men = new DataContainer<>();
+        men.add(new Man("Николай", 2));
+        men.add(new Man("Степан", 4));
+        men.add(new Man("Петр", 6));
+        men.add(new Man("Феофан", 1));
+        System.out.println("До сортировки с передачей датаконтейнера и "
+                + "компаратора: ");
+        System.out.println(men.toString());
+        DataContainer.sort(men, manNameComparator);
+        System.out.println("После сортировки с передачей датаконтейнера "
+                + "и компаратора: ");
+        System.out.println(men.toString());
     }
 }
