@@ -31,10 +31,8 @@ public class WarAndPeace {
         // и поместить их в коллекцию используя Set.
         // Знаки препинания, пробелы и переводы строк - это не слова.
         //2.0 и 4.2*
-        Set<String> words = new TreeSet<>();
         String patternString = "([А-Яа-яЁёA-Za-z\\d]+-{0,2}[А-Яа-яЁёA-Za-z]*)";
         List<String> arrWords = new ArrayList<>();
-        Map<String, Long> mapWords = new Hashtable<>();
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(book);
         String tmp;
@@ -43,15 +41,28 @@ public class WarAndPeace {
             arrWords.add(tmp);
         }
         //2.1
-        words.addAll(arrWords);
-//        System.out.println(arrWords);
-//        System.out.println(words);
+        Set<String> words = new TreeSet<>(arrWords);
+        System.out.println(arrWords.size());
+        System.out.println(words.size());
         
         //2.2 Найти в строке топ 10 слов и вывести количество
         // этих слов используя Map. Отсортировать по количеству.
         // Распечатать в консоль. Пример: Война - 200 раз,
         // Мир - 100 раз и так далее. Знаки препинания,
         // пробелы и переводы строк - это не слова.
+        showTopTenWords(arrWords);
+
+
+        EasySearch easySearch = new EasySearch();
+        System.out.println("Слово \"что\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "что") + " раз.");
+        System.out.println("Союз \"и\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "и") + " раз.");
+        System.out.println("Слово \"все\" " + "с поомщью EasySearch "
+                + easySearch.search(book, "все") + " раз.");
+    }
+
+    public static void showTopTenWords(List<String> arrWords) {
         Map<String, Integer> wordsCount = new HashMap<>();
         Integer wordCounter;
         for (String word : arrWords) {
@@ -65,9 +76,9 @@ public class WarAndPeace {
         }
         Map<String, Integer> topWordsCount = new LinkedHashMap<>();
         wordsCount.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue())
-                .forEach(e -> topWordsCount.put(e.getKey(), e.getValue()));
+            .stream()
+            .sorted(Map.Entry.comparingByValue())
+            .forEach(e -> topWordsCount.put(e.getKey(), e.getValue()));
         int capacity = topWordsCount.size();
         List<String> keysWords = new ArrayList<>(capacity);
         for (Map.Entry<String, Integer> entry : topWordsCount.entrySet()) {
@@ -75,17 +86,9 @@ public class WarAndPeace {
         }
         for (int i = keysWords.size() - 1; i >= keysWords.size() - 11; i--) {
             System.out.println(keysWords.get(i)
-                    + "\t" + topWordsCount.get(keysWords.get(i)).toString()
-                    + " раз");
+                + "\t" + topWordsCount.get(keysWords.get(i)).toString()
+                + " раз");
         }
-        
-        EasySearch easySearch = new EasySearch();
-        System.out.println("Слово \"что\" " + "с поомщью EasySearch "
-                + easySearch.search(book, "что") + " раз.");
-        System.out.println("Союз \"и\" " + "с поомщью EasySearch "
-                + easySearch.search(book, "и") + " раз.");
-        System.out.println("Слово \"все\" " + "с поомщью EasySearch "
-                + easySearch.search(book, "все") + " раз.");
     }
 
     private static String readAllBytesJava7(String filePath) {

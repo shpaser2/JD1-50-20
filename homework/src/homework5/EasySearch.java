@@ -4,19 +4,43 @@ public class EasySearch implements ISearchEngine{
     
     @Override
     public long search(String text, String word) {
-        int index = 0;
+        boolean caseInsensitive = false;
         long counter = 0;
         StringBuilder stringBuilder = new StringBuilder();
-        String[] strArr = new String[6];    //length was 12 with capitilize
-        String[] postStrings = {",", ".", " "};
-        String[] preStrings = {" ", ""};
-        boolean capitalize;
-        for (int i = 0; i < strArr.length; i++) {
-        //    capitalize = (i % 6) < 3;
-            strArr[i] = createWordForSearch(preStrings[i / 6], word,
-                        postStrings[i % 3], stringBuilder, false);
+        String[] postStrings = {",", ".", " ", ":", ";", "\"", "!", "?", "\n"
+            , ")", "\t", "\f", "*", "\'"};
+        String[] preStrings = {" ", "\n", " -", "\"", "(", "\t", "\f", "*"
+            , "\'", ",", "."};
+        int length = preStrings.length * postStrings.length;
+        length = caseInsensitive ? length * 2 : length;
+        //length * 2 if with capitalize
+        String[] strArr = new String[length];
+        if (caseInsensitive) {
+            //In lines below case insensitive array build of keys for search
+            // in text
+            int halfLength = strArr.length / 2;
+            for (int i = 0; i < halfLength; i++) {
+                strArr[i] =
+                    createWordForSearch(preStrings[(i / (halfLength / preStrings.length))],
+                        word, postStrings[(i % postStrings.length)],
+                        stringBuilder, 1);
+            }
+            for (int i = halfLength; i < strArr.length; i++) {
+                strArr[i] =
+                    createWordForSearch(preStrings[(i / (halfLength / preStrings.length))],
+                        word, postStrings[(i % postStrings.length)],
+                        stringBuilder, 2);
+            }
+        } else {
+            for (int i = 0; i < strArr.length; i++) {
+                strArr[i] =
+                    createWordForSearch(preStrings[(i / (strArr.length / preStrings.length))],
+                        word, postStrings[(i % postStrings.length)],
+                        stringBuilder, 0);
+            }
         }
-       
+
+        int index = 0;
         for (int i = 0; i < strArr.length; i++) {
             index = 0;
             do {
@@ -34,12 +58,19 @@ public class EasySearch implements ISearchEngine{
     private String createWordForSearch(String preStr, String word,
                                        String postStr,
                                        StringBuilder strBuilder,
-                                       Boolean capitalize){
+                                       int capitalize){
         String buf;
-        if (capitalize) {
-            buf = word.substring(0, 1).toUpperCase() + word.substring(1);
-        } else {
-            buf = word;
+        switch (capitalize) {
+            default:
+            case 0:
+                buf = word;
+                break;
+            case 1:
+                buf = word.substring(0, 1).toUpperCase() + word.substring(1);
+                break;
+            case 2:
+                buf = word.substring(0, 1).toLowerCase() + word.substring(1);
+                break;
         }
         String result =
                 strBuilder.append(preStr).append(buf)
