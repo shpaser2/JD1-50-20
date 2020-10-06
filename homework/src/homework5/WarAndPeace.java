@@ -32,7 +32,7 @@ public class WarAndPeace {
         // Знаки препинания, пробелы и переводы строк - это не слова.
         //2.0 и 4.2*
         Set<String> words = new TreeSet<>();
-        String patternString = "([А-Яа-яЁё]+-{0,2}[А-Яа-яЁё]*)";
+        String patternString = "([А-Яа-яЁёA-Za-z\\d]+-{0,2}[А-Яа-яЁёA-Za-z]*)";
         List<String> arrWords = new ArrayList<>();
         Map<String, Long> mapWords = new Hashtable<>();
         Pattern pattern = Pattern.compile(patternString);

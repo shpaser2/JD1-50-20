@@ -7,17 +7,16 @@ public class EasySearch implements ISearchEngine{
         int index = 0;
         long counter = 0;
         StringBuilder stringBuilder = new StringBuilder();
-        String[] strArr = new String[3];
-        strArr[0] =
-                stringBuilder.append(" ").append(word).append(",").toString();
-        stringBuilder.setLength(0);
-        strArr[1] =
-                stringBuilder.append(" ").append(word).append(".").toString();
-        stringBuilder.setLength(0);
-        strArr[2] =
-                stringBuilder.append(" ").append(word).append(" ").toString();
-        stringBuilder.setLength(0);
-        
+        String[] strArr = new String[6];    //length was 12 with capitilize
+        String[] postStrings = {",", ".", " "};
+        String[] preStrings = {" ", ""};
+        boolean capitalize;
+        for (int i = 0; i < strArr.length; i++) {
+        //    capitalize = (i % 6) < 3;
+            strArr[i] = createWordForSearch(preStrings[i / 6], word,
+                        postStrings[i % 3], stringBuilder, false);
+        }
+       
         for (int i = 0; i < strArr.length; i++) {
             index = 0;
             do {
@@ -28,7 +27,24 @@ public class EasySearch implements ISearchEngine{
                 }
             } while (index != -1);
         }
-        
         return counter;
+    }
+    
+    
+    private String createWordForSearch(String preStr, String word,
+                                       String postStr,
+                                       StringBuilder strBuilder,
+                                       Boolean capitalize){
+        String buf;
+        if (capitalize) {
+            buf = word.substring(0, 1).toUpperCase() + word.substring(1);
+        } else {
+            buf = word;
+        }
+        String result =
+                strBuilder.append(preStr).append(buf)
+                        .append(postStr).toString();
+        strBuilder.setLength(0);
+        return result;
     }
 }
