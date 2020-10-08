@@ -80,27 +80,10 @@ public class ArrayConsoleInOutMain {
      * @param arr целочисленный массив
      */
     public static void printArrayByAllCyclesForward(int[] arr) {
-        int arrLength = arr.length;
-        int index = 0;
-        System.out.println("\nВывод с помощью do..while");
-        do {
-            System.out.print(arr[index] + " ");
-            index++;
-        } while (index < arrLength);
-        System.out.println("\nВывод с помощью while");
-        index = 0;
-        while (index < arrLength) {
-            System.out.print(arr[index] + " ");
-            index++;
-        }
-        System.out.println("\nВывод с помощью for");
-        for (index = 0; index < arrLength; index++) {
-            System.out.print(arr[index] + " ");
-        }
-        System.out.println("\nВывод с помощью foreach");
-        for (int element : arr) {
-            System.out.print(element + " ");
-        }
+        arrayStraightOutputDoWhile(arr);
+        arrayStraightOutputWhile(arr);
+        arrayStraightOutputFor(arr);
+        arrayStraightOutputForeach(arr);
     }
     
     /**
@@ -123,26 +106,119 @@ public class ArrayConsoleInOutMain {
      */
     public static void printArrayByAllCyclesBackward(int[] arr) {
         System.out.println("\n\nВсе выводы массива в обратном порядке");
-        int maxIndex = arr.length - 1;
-        int index = maxIndex;
+        arrayReverseOutputDoWhile(arr);
+        arrayReverseOutputWhile(arr);
+        arrayReverseOutputFor(arr);
+        arrayReverseOutputForeach(arr);
+    }
+
+    /**
+     * Вывод переданного аргументом массива в прямом
+     * порядке с помощью do..while.
+     * @param arr целочисленный массив
+     */
+    public static void arrayStraightOutputDoWhile(int[] arr) {
+        int arrLength = arr.length;
+        int index = 0;
+        System.out.println("\nВывод с помощью do..while");
+        do {
+            System.out.print(arr[index] + " ");
+            index++;
+        } while (index < arrLength);
+    }
+
+    /**
+     * Вывод переданного аргументом массива в прямом
+     * порядке с помощью while.
+     * @param arr целочисленный массив
+     */
+    public static void arrayStraightOutputWhile(int[] arr) {
+        int arrLength = arr.length;
+        int index = 0;
+        System.out.println("\nВывод с помощью while");
+        while (index < arrLength) {
+            System.out.print(arr[index] + " ");
+            index++;
+        }
+    }
+
+    /**
+     * Вывод переданного аргументом массива в прямом
+     * порядке с помощью for.
+     * @param arr целочисленный массив
+     */
+    public static void arrayStraightOutputFor(int[] arr) {
+        int arrLength = arr.length;
+        int index = 0;
+        System.out.println("\nВывод с помощью for");
+        for (index = 0; index < arrLength; index++) {
+            System.out.print(arr[index] + " ");
+        }
+    }
+
+    /**
+     * Вывод переданного аргументом массива в прямом
+     * порядке с помощью foreach.
+     * @param arr целочисленный массив
+     */
+    public static void arrayStraightOutputForeach(int[] arr) {
+        System.out.println("\nВывод с помощью foreach");
+        for (int element : arr) {
+            System.out.print(element + " ");
+        }
+    }
+
+    /**
+     * Вывод переданного аргументом массива в обратном
+     * порядке с помощью do..while.
+     * @param arr целочисленный массив
+     */
+    public static void arrayReverseOutputDoWhile(int[] arr) {
+        int index = arr.length - 1;
         System.out.println("Вывод с помощью do..while");
         do {
             System.out.print(arr[index] + " ");
             index--;
         } while (index >= 0);
+    }
+
+    /**
+     * Вывод переданного аргументом массива в обратном
+     * порядке с помощью while.
+     * @param arr целочисленный массив
+     */
+    public static void arrayReverseOutputWhile(int[] arr) {
+        int index = arr.length - 1;
         System.out.println("\nВывод с помощью while");
-        index = maxIndex;
         while (index >= 0) {
             System.out.print(arr[index] + " ");
             index--;
         }
+    }
+
+    /**
+     * Вывод переданного аргументом массива в обратном
+     * порядке с помощью for.
+     * @param arr целочисленный массив
+     */
+    public static void arrayReverseOutputFor(int[] arr) {
+        int maxIndex = arr.length - 1;
+        int index;
         System.out.println("\nВывод с помощью for");
         for (index = maxIndex; index >= 0; index--) {
             System.out.print(arr[index] + " ");
         }
+    }
+
+    /**
+     * Вывод переданного аргументом массива в обратном
+     * порядке с помощью foreach.
+     * @param arr целочисленный массив
+     */
+    public static void arrayReverseOutputForeach(int[] arr) {
         System.out.println("\nВывод с помощью foreach");
         int[] turnedArray = new int[arr.length];
-        index = maxIndex;
+        int index = arr.length - 1;
         for (int element : arr) {
             turnedArray[index] = element;
             index--;
