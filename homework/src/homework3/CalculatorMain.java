@@ -14,6 +14,8 @@
  */
 package homework3;
 
+import java.util.Scanner;
+
 /**
  * Класс тестирования калькуляторов.
  * Здесь есть проверка методов калькуляторов,
@@ -56,6 +58,18 @@ public class CalculatorMain {
         System.out.println(calc3.getCountOperation());
         
         calcM.testCalcWithMemory();
+
+        CalculatorWithCounter calculatorWithCounter =
+            new CalculatorWithCounter(new CalculatorWithMathCopy());
+        StringCalc strCalc = new StringCalc(calculatorWithCounter);
+        Scanner input = new Scanner(System.in);
+        System.out.println("Введите выражение: ");
+//        String str = "(123*(33.456*123+5*9*6*2-23.4566))/10+PI^25";
+        //  | |, ^ - not works now.
+//        String str = "(2*(0.5*1+5*1*6-25.5))/10+25"; //this works
+        String string = input.nextLine();
+        strCalc.solveEquation(string);
+        System.out.println(calculatorWithCounter.getCountOperation());
     }
     
     /**

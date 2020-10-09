@@ -40,7 +40,7 @@ public class CalculatorWithMathCopy implements Calculator {
      * @param factorTwo второй множитель
      * @return произведение множителей
      */
-    public double multiplication(double factorOne, int factorTwo) {
+    public double multiplication(double factorOne, double factorTwo) {
         return factorOne * factorTwo;
     }
     

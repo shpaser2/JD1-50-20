@@ -14,6 +14,8 @@
  */
 package homework3;
 
+import oop.calc.dto.ICalc;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -21,52 +23,49 @@ import java.util.regex.Pattern;
 
 /**
  * This class can calc mathematical expression in string
- * and show the result in double.
- * Acceptable operators - * / + - and ( ).
+ * and shows the result in double.
+ * Acceptable operators - * / + - ^ and ( ).
  * Acceptable constants - PI, E.
  * Numbers - any not negative integer or float.
  *
- * @version   0.9 16.09.2020
+ * @version   1.0 09.10.2020
  * @author    Сергей Шпаковский
  */
 public class StringCalc {
-    
+    private Calculator calc;
+
+    public StringCalc(Calculator calc) {
+        this.calc = calc;
+    }
+
     /**
      * Entrance point.
-     * @param args
      */
-    public static void main(String[] args) {
-        StringCalc strCalc = new StringCalc();
+    public void solveEquation(String str) {
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("Введите выражение: ");
-//        String str = "(123*(33.456*123+5*9*6*2-23.4566))/10+PI^25";
-        //  | |, ^ - not works now.
-//        String str = "(2*(0.5*1+5*1*6-25.5))/10+25"; //this works
-        String str = input.nextLine();
         //str -> char array -> replace in char array PI by 3.142 ->
         //-> replace in char array E by 2.718 -> char array back to str
         str = str.replaceAll("\\s+","");
-        ArrayList<Character> charList = StringCalc.stringToCharacterList(str);
-    
+        ArrayList<Character> charList = stringToCharacterList(str);
+
         for (int i = 0; i < charList.size() - 1; i++) {
             if (charList.get(i).equals('P') && charList.get(i + 1).equals('I')) {
-                StringCalc.insertPI(charList, i);
+                insertPI(charList, i);
             }
         }
         for (int i = 0; i < charList.size() - 1; i++) {
             if (charList.get(i).equals('E')) {
-                StringCalc.insertE(charList, i);
+                insertE(charList, i);
             }
         }
-        str = StringCalc.getStringFromCharacterList(charList);
-        ArrayList<String> arrStr = strCalc.parseEquation(str);
-        strCalc.calcAll(arrStr);
+        str = getStringFromCharacterList(charList);
+        ArrayList<String> arrStr = parseEquation(str);
+        calcAll(arrStr);
         System.out.println("Result: ");
-        strCalc.print(arrStr);
+        print(arrStr);
     }
-    
-    private static String getStringFromCharacterList(
+
+    private String getStringFromCharacterList(
             ArrayList<Character> list) {
         StringBuilder builder = new StringBuilder(list.size());
         for (Character ch: list) {
@@ -75,7 +74,7 @@ public class StringCalc {
         return builder.toString();
     }
     
-    private static void insertPI(ArrayList<Character> charList,
+    private void insertPI(ArrayList<Character> charList,
                                  int startIndex) {
         charList.set(startIndex, '3');
         charList.set(startIndex + 1, '.');
@@ -84,7 +83,7 @@ public class StringCalc {
         charList.add(startIndex + 4, '2');
     }
     
-    private static void insertE(ArrayList<Character> charList,
+    private void insertE(ArrayList<Character> charList,
                                  int startIndex) {
         charList.set(startIndex, '2');
         charList.add(startIndex + 1, '.');
@@ -93,7 +92,7 @@ public class StringCalc {
         charList.add(startIndex + 4, '8');
     }
     
-    private static ArrayList<Character> stringToCharacterList(String str) {
+    private ArrayList<Character> stringToCharacterList(String str) {
         if ( str == null ) {
             return null;
         }
@@ -128,7 +127,7 @@ public class StringCalc {
         ArrayList<String> arrStr = new ArrayList<>();
         Scanner buf = new Scanner(str);
         Pattern pattern = Pattern.compile(
-                "[\\d]+\\.?[\\d]*|\\+|-|\\*|/|[)]|[(]");
+            "[\\d]+\\.?[\\d]*|\\+|-|\\*|/|[)]|[(]|[\\^]");
         String result;
         do {
             result = buf.findInLine(pattern);
@@ -141,7 +140,7 @@ public class StringCalc {
     
     /**
      * It calcs any mathematical expression from console input with
-     * + - / * operators, integer and float digits,
+     * + - / * ^ operators, integer and float digits,
      * brackets '(' and ')'.
      * @param allStr arrayList with mathematical expression to calc.
      */
@@ -175,7 +174,7 @@ public class StringCalc {
     }
     
     /**
-     * It calcs any part in brackets or
+     * It calculates any part in brackets or
      * mathematical expression without them.
      * @param start index of beginning for calculation
      *              in main string array of mathematical expression.
@@ -193,17 +192,34 @@ public class StringCalc {
         double result = 0;
         int i = borders? start + 1 : start;
         for (; i < stop; i++) {
+            if (allStr.get(i).equals("^")) {
+                result = this.calc.powerDouble(
+                    Double.parseDouble(allStr.get(i - 1)),
+                    (int)Double.parseDouble(allStr.get(i + 1)));
+                allStr.set(i - 1, String.format(Locale.ROOT, "%.3f", result));
+                allStr.remove(i);
+                allStr.remove(i);
+                i = borders ? start + 1 : start;
+                stop -= 2;
+            }
+        }
+
+        result = 0;
+        i = borders? start + 1 : start;
+        for (; i < stop; i++) {
             if (allStr.get(i).equals("*")) {
-                result = Double.valueOf(allStr.get(i - 1)) *
-                        Double.valueOf(allStr.get(i + 1));
+                result = this.calc.multiplication(
+                        Double.parseDouble(allStr.get(i - 1)),
+                        Double.parseDouble(allStr.get(i + 1)));
                 allStr.set(i - 1, String.format(Locale.ROOT, "%.3f", result));
                 allStr.remove(i);
                 allStr.remove(i);
                 i = borders ? start + 1 : start;
                 stop -= 2;
             } else if (allStr.get(i).equals("/")) {
-                result = Double.valueOf(allStr.get(i - 1)) /
-                        Double.valueOf(allStr.get(i + 1));
+                result = this.calc.division(
+                    Double.parseDouble(allStr.get(i - 1)),
+                    Double.parseDouble(allStr.get(i + 1)));
                 allStr.set(i - 1, String.format(Locale.ROOT, "%.3f", result));
                 allStr.remove(i);
                 allStr.remove(i);
@@ -216,16 +232,18 @@ public class StringCalc {
         i = borders? start + 1 : start;
         for (; i < stop; i++) {
             if (allStr.get(i).equals("+")) {
-                result = Double.valueOf(allStr.get(i - 1)) +
-                        Double.valueOf(allStr.get(i + 1));
+                result = this.calc.addition(
+                    Double.parseDouble(allStr.get(i - 1)),
+                    Double.parseDouble(allStr.get(i + 1)));
                 allStr.set(i - 1, String.format(Locale.ROOT, "%.3f", result));
                 allStr.remove(i);
                 allStr.remove(i);
                 i = borders? start + 1 : start;
                 stop -= 2;
             } else if (allStr.get(i).equals("-")) {
-                result = Double.valueOf(allStr.get(i - 1)) -
-                        Double.valueOf(allStr.get(i + 1));
+                result = this.calc.subtraction(
+                    Double.parseDouble(allStr.get(i - 1)),
+                    Double.parseDouble(allStr.get(i + 1)));
                 allStr.set(i - 1, String.format(Locale.ROOT, "%.3f", result));
                 allStr.remove(i);
                 allStr.remove(i);

@@ -51,7 +51,7 @@ public class CalculatorWithMemory implements Calculator {
      * @param factorTwo второй множитель
      * @return произведение множителей
      */
-    public double multiplication(double factorOne, int factorTwo) {
+    public double multiplication(double factorOne, double factorTwo) {
         this.counter++;
         this.result = calc.multiplication(factorOne, factorTwo);
         return this.result;

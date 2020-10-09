@@ -46,7 +46,7 @@ public class CalculatorWithCounter implements Calculator {
      * @param factorTwo второй множитель
      * @return произведение множителей
      */
-    public double multiplication(double factorOne, int factorTwo) {
+    public double multiplication(double factorOne, double factorTwo) {
         this.counter++;
         return calc.multiplication(factorOne, factorTwo);
     }

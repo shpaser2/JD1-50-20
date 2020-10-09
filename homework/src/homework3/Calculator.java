@@ -38,7 +38,7 @@ public interface Calculator {
      * @param factorTwo второй множитель
      * @return произведение множителей
      */
-    double multiplication(double factorOne, int factorTwo);
+    double multiplication(double factorOne, double factorTwo);
     
     /**
      * Нахождение разности двух чисел.
