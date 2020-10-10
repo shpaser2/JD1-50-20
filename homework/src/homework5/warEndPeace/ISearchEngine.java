@@ -1,4 +1,4 @@
-package homework5;
+package homework5.warEndPeace;
 
 public interface ISearchEngine {
     
