@@ -40,8 +40,7 @@ public class WarAndPeace {
         // Используя метод readAllBytesJava7 считать сохранённый файл
         //и сохранить результат считывания
         // в переменную типа типа String.
-        //String filePath = "h:/book.txt";
-        String filePath = "c:/book.txt";
+        String filePath = "../../../../../book.txt";
         String book = readAllBytesJava7(filePath);
 //        System.out.println(book);
 
