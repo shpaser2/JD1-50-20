@@ -10,15 +10,13 @@ public class SetMain5 {
         boolean answ1 = data.add(new String("Привет"));
         boolean answ2 = data.add(new String("Пока"));
         boolean answ3 = data.add(new String("Привет"));
-    
+
         System.out.println(answ1);
         System.out.println(answ2);
         System.out.println(answ3);
-        
+
         System.out.println(data);
-        
+
         Iterator<String> iterator = data.iterator();
-        
-        
     }
 }

@@ -1,7 +1,11 @@
 package collections;
 
+import collections.dto.Client;
+import collections.dto.Gender;
 import collections.dto.Passport;
-import collections.service.*;
+import collections.service.Bank;
+import collections.service.MapBankStorage;
+import collections.service.MapBankStorageNew;
 
 import java.util.Date;
 import java.util.List;
@@ -28,27 +32,25 @@ public class BankMain {
 //        // For example usage must be through interface layer.
     
         Passport passport = new Passport();
-        passport.setId("1234567890");
-        passport.setName("Иван");
-        passport.setNumber("21314135354124fdsffsd");
+        passport.setId("123542678");
+        passport.setName("Илья");
+        passport.setNumber("ЬЗФЫВ12345");
         passport.setGender(Gender.МУЖЧИНА);
-        passport.setRegDate(new Date());
         passport.setStartDay(new Date());
-        
+        passport.setRegDate(new Date());
+
         bank.saveNewClient(passport);
-    
-        Client client = bank.getClient("1234567890");
-    
+
+        Client client = bank.getClient("123542678");
+
         System.out.println(client);
-    
-        List<Passport> passportsByClientId = bank.getPassportsByClientId(
-                "1234567890");
-    
-        System.out.println(passportsByClientId.toString());
-        
+
+        List<Passport> passportsByClientId = bank.getPassportsByClientId("123542678");
+
+        System.out.println(passportsByClientId);
+
         List<Passport> passports = bank.getPassports();
-    
+
         System.out.println(passports);
-        
     }
 }

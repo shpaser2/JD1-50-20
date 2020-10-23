@@ -9,15 +9,15 @@ import java.util.List;
 public class ListMain5 {
     public static void main(String[] args) {
         List<Integer> data = new LinkedList<>();
-    
+
         for (int i = 0; i < 1001; i++) {
             data.add(i);
         }
-    
+
         System.out.println(data);
-    
+
         Iterator<Integer> iterator = data.iterator();
-        
+
         //BAD
 //        int i = -1;
 //        while (iterator.hasNext()) {
@@ -53,5 +53,7 @@ public class ListMain5 {
 //        for (Integer b : man) {
 //
 //        }
+
+        System.out.println(data);
     }
 }

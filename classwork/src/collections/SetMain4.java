@@ -31,7 +31,7 @@ public class SetMain4 {
                 "id1234567890",
                 RandomString.nextString(9)));
         for (PassportIdUnique passport : passports) {
-            System.out.println(passport.toString());
+            System.out.println(passport);
         }
     }
 }

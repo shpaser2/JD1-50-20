@@ -1,6 +1,8 @@
 package generic.dto;
 
-public class BoxObject {
+import java.io.Serializable;
+
+public class BoxObject implements Serializable {
     private Object item;
     private Object itemTwo;
     
