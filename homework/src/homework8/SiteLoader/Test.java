@@ -6,6 +6,8 @@ public class Test {
         printRates(new NBRBLoader());
         System.out.println("продажа, БПС");
         printRates(new BPSLoader());
+        System.out.println("продажа, БелАгроБанк");
+        printRates(new BABLoader());
     }
 
     public static void printRates(SiteLoader loader){
