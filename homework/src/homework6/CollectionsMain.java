@@ -50,12 +50,12 @@ public class CollectionsMain {
         long stopTime;
         //3.1 При помощи рандома генерируем 100_000 разных объектов
         // одного класса.
-        HashSet<Person> perons = new HashSet<>(OBJECTS_AMOUNT);
-        createPersons(perons);
+        HashSet<Person> persons = new HashSet<>(OBJECTS_AMOUNT);
+        createPersons(persons);
 
         //3.2.1. Заполняем LinkedList
         startTime = System.currentTimeMillis();
-        LinkedList<Person> personLinkedList = new LinkedList<>(perons);
+        LinkedList<Person> personLinkedList = new LinkedList<>(persons);
         stopTime = System.currentTimeMillis();
 
         //3.4.1 Время заполнения коллекции LinkedList
@@ -64,7 +64,7 @@ public class CollectionsMain {
 
         //3.2.2. Заполняем ArrayList
         startTime = System.currentTimeMillis();
-        ArrayList<Person> personArrayList = new ArrayList<>(perons);
+        ArrayList<Person> personArrayList = new ArrayList<>(persons);
         stopTime = System.currentTimeMillis();
 
         //3.4.1 Время заполнения коллекции ArrayList
@@ -73,7 +73,7 @@ public class CollectionsMain {
 
         //3.2.3. Заполняем HashSet
         startTime = System.currentTimeMillis();
-        HashSet<Person> personHashSet = new HashSet<>(perons);
+        HashSet<Person> personHashSet = new HashSet<>(persons);
         stopTime = System.currentTimeMillis();
 
         //3.4.1 Время заполнения коллекции HashSet
@@ -82,7 +82,7 @@ public class CollectionsMain {
 
         //3.2.4. Заполняем TreeSet
         startTime = System.currentTimeMillis();
-        TreeSet<Person> personTreeSet = new TreeSet<>(perons);
+        TreeSet<Person> personTreeSet = new TreeSet<>(persons);
         stopTime = System.currentTimeMillis();
 
         //3.4.1 Время заполнения коллекции TreeSet
@@ -99,10 +99,16 @@ public class CollectionsMain {
 
         //3.3.1. Сортируем коллекции встроенными средствами jdk
         PersonComparator personComparator = new PersonComparator();
-        sortPersonsWithTime(personArrayList, personComparator);
-        sortPersonsWithTime(personLinkedList, personComparator);
-        sortPersonsWithTime(personHashSet, personComparator);
-        sortPersonsWithTime(personTreeSet, personComparator);
+        //new version with static methods with generic
+        mySortWithTimeGeneric(personLinkedListCopy, personComparator, true);
+        mySortWithTimeGeneric(personArrayListCopy, personComparator, true);
+        mySortWithTimeGeneric(personHashSetCopy, personComparator, true);
+        mySortWithTimeGeneric(personTreeSetCopy, personComparator, true);
+        //old version without static methods with generic
+//        sortPersonsWithTime(personArrayList, personComparator);
+//        sortPersonsWithTime(personLinkedList, personComparator);
+//        sortPersonsWithTime(personHashSet, personComparator);
+//        sortPersonsWithTime(personTreeSet, personComparator);
         //Альтернативные сортировки стандартными средствами с помощью лямбд
 //        personHashSet.stream().sorted(personComparator)
 //                .forEach(s -> System.out.print(s));
@@ -110,10 +116,17 @@ public class CollectionsMain {
 //                .forEach(s -> System.out.print(s));
 
         //3.3.2.* Сортируем коллекции собственным методом сортировки
-        mySortPersonsWithTime(personLinkedListCopy, personComparator);
-        mySortPersonsWithTime(personArrayListCopy, personComparator);
-        mySortPersonsWithTime(personHashSetCopy, personComparator);
-        mySortPersonsWithTime(personTreeSetCopy, personComparator);
+        //new version with static methods with generic
+        mySortWithTimeGeneric(personLinkedListCopy, personComparator, false);
+        mySortWithTimeGeneric(personArrayListCopy, personComparator, false);
+        mySortWithTimeGeneric(personHashSetCopy, personComparator, false);
+        mySortWithTimeGeneric(personTreeSetCopy, personComparator, false);
+        //old version without static methods with generic
+//        mySortPersonsWithTime(personLinkedListCopy, personComparator);
+//        mySortPersonsWithTime(personArrayListCopy, personComparator);
+//        mySortPersonsWithTime(personHashSetCopy, personComparator);
+//        mySortPersonsWithTime(personTreeSetCopy, personComparator);
+
         //  3.4.2. Итерирования коллекции:
         //  3.4.2.1. При помощи iterator
         iterThroughList(personArrayList);
@@ -186,10 +199,16 @@ public class CollectionsMain {
 
         //3.3.1. Сортируем коллекции встроенными средствами jdk
         AnimalComparator animalComparator = new AnimalComparator();
-        sortWithTime(animalArrayList, animalComparator);
-        sortWithTime(animalLinkedList, animalComparator);
-        sortWithTime(animalHashSet, animalComparator);
-        sortWithTime(animalTreeSet, animalComparator);
+        //new version with static methods with generic
+        mySortWithTimeGeneric(animalArrayList, animalComparator, true);
+        mySortWithTimeGeneric(animalLinkedList, animalComparator, true);
+        mySortWithTimeGeneric(animalHashSet, animalComparator, true);
+        mySortWithTimeGeneric(animalTreeSet, animalComparator, true);
+        //old version without static methods with generic
+//        sortWithTime(animalArrayList, animalComparator);
+//        sortWithTime(animalLinkedList, animalComparator);
+//        sortWithTime(animalHashSet, animalComparator);
+//        sortWithTime(animalTreeSet, animalComparator);
         //Альтернативные сортировки стандартными средствами с помощью лямбд
 //        animalHashSet.stream().sorted(animalComparator)
 //                .forEach(s -> System.out.print(s));
@@ -197,10 +216,17 @@ public class CollectionsMain {
 //                .forEach(s -> System.out.print(s));
 
         //3.3.2.* Сортируем коллекции собственным методом сортировки
-        mySortWithTime(animalLinkedListCopy, animalComparator);
-        mySortWithTime(animalArrayListCopy, animalComparator);
-        mySortWithTime(animalHashSetCopy, animalComparator);
-        mySortWithTime(animalTreeSetCopy, animalComparator);
+        //new version with static methods with generic
+        mySortWithTimeGeneric(animalLinkedListCopy, animalComparator, false);
+        mySortWithTimeGeneric(animalArrayListCopy, animalComparator, false);
+        mySortWithTimeGeneric(animalHashSetCopy, animalComparator, false);
+        mySortWithTimeGeneric(animalTreeSetCopy, animalComparator, false);
+
+        //old version without static methods with generic
+//        mySortWithTime(animalLinkedListCopy, animalComparator);
+//        mySortWithTime(animalArrayListCopy, animalComparator);
+//        mySortWithTime(animalHashSetCopy, animalComparator);
+//        mySortWithTime(animalTreeSetCopy, animalComparator);
         //  3.4.2. Итерирования коллекции:
         //  3.4.2.1. При помощи iterator
         iterThroughList(animalArrayList);
@@ -329,297 +355,297 @@ public class CollectionsMain {
         }
     }
 
-    /**
-     * QuickSort сортировка копии элементов в List для Set
-     * коллекции объектов типа Person
-     * с использованием компаратора для Person.
-     * @param persons   Set коллекция Person, List копия элементов
-     *                  которой которой будет отсортирована.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Person.
-     */
-    public static void mySortPersonsWithTime(Set<Person> persons,
-                                      Comparator<Person> comparator) {
-        long startTime;
-        long stopTime;
-        ArrayList<Person> bufCopy = new ArrayList<>(persons);
-        startTime = System.currentTimeMillis();
-        //sortPersons(persons, comparator); //>2+ hours for 100_000
-//        quickSortPerson(bufCopy, 0, persons.size() - 1, comparator);
-        qSortPerson(bufCopy, comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "сортировка своим методом List копии объектов из",
-                persons, startTime, stopTime);
-        bufCopy.clear();
-    }
+//    /**
+//     * QuickSort сортировка копии элементов в List для Set
+//     * коллекции объектов типа Person
+//     * с использованием компаратора для Person.
+//     * @param persons   Set коллекция Person, List копия элементов
+//     *                  которой которой будет отсортирована.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Person.
+//     */
+//    public static void mySortPersonsWithTime(Set<Person> persons,
+//                                      Comparator<Person> comparator) {
+//        long startTime;
+//        long stopTime;
+//        ArrayList<Person> bufCopy = new ArrayList<>(persons);
+//        startTime = System.currentTimeMillis();
+//        //sortPersons(persons, comparator); //>2+ hours for 100_000
+////        quickSortPerson(bufCopy, 0, persons.size() - 1, comparator);
+//        qSortPerson(bufCopy, comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "сортировка своим методом List копии объектов из",
+//                persons, startTime, stopTime);
+//        bufCopy.clear();
+//    }
 
-    /**
-     * Стандартная сортировка копии элементов в List для Set
-     * коллекции объектов типа Person.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                   для сравнения двух объектов типа Person.
-     */
-    public static void sortPersonsWithTime(Set<Person> persons,
-                                    Comparator<Person> comparator) {
-        long startTime;
-        long stopTime;
-        ArrayList<Person> bufCopy = new ArrayList<>(persons);
-        startTime = System.currentTimeMillis();
-        bufCopy.sort(comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "стандартная сортировка копии объектов из",
-                persons, startTime, stopTime);
-        bufCopy.clear();
-    }
+//    /**
+//     * Стандартная сортировка копии элементов в List для Set
+//     * коллекции объектов типа Person.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                   для сравнения двух объектов типа Person.
+//     */
+//    public static void sortPersonsWithTime(Set<Person> persons,
+//                                    Comparator<Person> comparator) {
+//        long startTime;
+//        long stopTime;
+//        ArrayList<Person> bufCopy = new ArrayList<>(persons);
+//        startTime = System.currentTimeMillis();
+//        bufCopy.sort(comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "стандартная сортировка копии объектов из",
+//                persons, startTime, stopTime);
+//        bufCopy.clear();
+//    }
+//
+//    /**
+//     * QuickSort сортировка для List коллекции объектов типа Person
+//     * с использованием компаратора для Person и измерением времени
+//     * сортировки с последующим выводом сообщения о длительности
+//     * сортировки.
+//     * @param persons   коллекция для сортировки.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Person.
+//     */
+//    public static void mySortPersonsWithTime(List<Person> persons,
+//                                      Comparator<Person> comparator) {
+//        long startTime;
+//        long stopTime;
+//        startTime = System.currentTimeMillis();
+//        //sortPersons(persons, comparator); //>2+ hours for 100_000
+//        //quickSortPerson(persons, 0, persons.size() - 1, comparator);
+//        qSortPerson(persons, comparator);   //без рекурсии быстрее
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "сортировка своим методом объектов в",
+//                persons, startTime, stopTime);
+//    }
+//
+//    /**
+//     * Стандартная сортировка для List коллекции объектов типа Person
+//     * с использованием компаратора для Person и измерением времени
+//     * сортировки с последующим выводом сообщения о длительности
+//     * сортировки.
+//     * @param persons   коллекция для сортировки.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Person.
+//     */
+//    public static void sortPersonsWithTime(List<Person> persons,
+//                                    Comparator<Person> comparator) {
+//        long startTime;
+//        long stopTime;
+//        startTime = System.currentTimeMillis();
+//        persons.sort(comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "стандартная сортировка объектов в",
+//                persons, startTime, stopTime);
+//    }
 
-    /**
-     * QuickSort сортировка для List коллекции объектов типа Person
-     * с использованием компаратора для Person и измерением времени
-     * сортировки с последующим выводом сообщения о длительности
-     * сортировки.
-     * @param persons   коллекция для сортировки.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Person.
-     */
-    public static void mySortPersonsWithTime(List<Person> persons,
-                                      Comparator<Person> comparator) {
-        long startTime;
-        long stopTime;
-        startTime = System.currentTimeMillis();
-        //sortPersons(persons, comparator); //>2+ hours for 100_000
-        //quickSortPerson(persons, 0, persons.size() - 1, comparator);
-        qSortPerson(persons, comparator);   //без рекурсии быстрее
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "сортировка своим методом объектов в",
-                persons, startTime, stopTime);
-    }
+//    /**
+//     * Пузырьковая сортировка для List коллекции объектов типа Person.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Person.
+//     */
+//    public static void sortPersons(List<Person> persons,
+//                            Comparator<Person> comparator) {
+//        Person tmp;
+//        for (int i = 0; i < persons.size() - 1; i++) {
+//            for (int j = 0; j < persons.size() - 1; j++) {
+//                if (comparator.compare(persons.get(j),
+//                        persons.get(j + 1)) > 0) {
+//                    tmp = persons.get(j);
+//                    persons.set(j, persons.get(j + 1));
+//                    persons.set(j + 1, tmp);
+//                }
+//            }
+//        }
+//    }
 
-    /**
-     * Стандартная сортировка для List коллекции объектов типа Person
-     * с использованием компаратора для Person и измерением времени
-     * сортировки с последующим выводом сообщения о длительности
-     * сортировки.
-     * @param persons   коллекция для сортировки.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Person.
-     */
-    public static void sortPersonsWithTime(List<Person> persons,
-                                    Comparator<Person> comparator) {
-        long startTime;
-        long stopTime;
-        startTime = System.currentTimeMillis();
-        persons.sort(comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "стандартная сортировка объектов в",
-                persons, startTime, stopTime);
-    }
+//    /**
+//     * Метод сортировки части значений для работы сортировки quickSort
+//     * @param list коллекция типа List для сортировки quicksort'ом
+//     * @param begin элемент с которого начинается сортировка
+//     * @param end элемент до которого заканчивается сортировка
+//     * @param comparator компаратор, по которому пройдёт сортировка.
+//     * @return коллекция с отсортированной частью
+//     */
+//    private static int partitionPerson(List<Person> list, int begin, int end,
+//                                 Comparator<Person> comparator) {
+//        int pivot = end;
+//
+//        int counter = begin;
+//        for (int i = begin; i < end; i++) {
+//            if (comparator.compare(list.get(i), list.get(pivot)) < 0) {
+//                Person temp = list.get(counter);
+//                list.set(counter, list.get(i));
+//                list.set(i, temp);
+//                counter++;
+//            }
+//        }
+//        Person temp = list.get(pivot);
+//        list.set(pivot, list.get(counter));
+//        list.set(counter, temp);
+//
+//        return counter;
+//    }
 
-    /**
-     * Пузырьковая сортировка для List коллекции объектов типа Person.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Person.
-     */
-    public static void sortPersons(List<Person> persons,
-                            Comparator<Person> comparator) {
-        Person tmp;
-        for (int i = 0; i < persons.size() - 1; i++) {
-            for (int j = 0; j < persons.size() - 1; j++) {
-                if (comparator.compare(persons.get(j),
-                        persons.get(j + 1)) > 0) {
-                    tmp = persons.get(j);
-                    persons.set(j, persons.get(j + 1));
-                    persons.set(j + 1, tmp);
-                }
-            }
-        }
-    }
-
-    /**
-     * Метод сортировки части значений для работы сортировки quickSort
-     * @param list коллекция типа List для сортировки quicksort'ом
-     * @param begin элемент с которого начинается сортировка
-     * @param end элемент до которого заканчивается сортировка
-     * @param comparator компаратор, по которому пройдёт сортировка.
-     * @return коллекция с отсортированной частью
-     */
-    private static int partitionPerson(List<Person> list, int begin, int end,
-                                 Comparator<Person> comparator) {
-        int pivot = end;
-
-        int counter = begin;
-        for (int i = begin; i < end; i++) {
-            if (comparator.compare(list.get(i), list.get(pivot)) < 0) {
-                Person temp = list.get(counter);
-                list.set(counter, list.get(i));
-                list.set(i, temp);
-                counter++;
-            }
-        }
-        Person temp = list.get(pivot);
-        list.set(pivot, list.get(counter));
-        list.set(counter, temp);
-
-        return counter;
-    }
-
-    /**
-     * Сортировка QuickSort для коллекций типа List c объектами Person
-     * @param list List c объектами Person
-     * @param begin индекс элемента начала сортировки
-     * @param end индекс элемента окончания сортировки
-     * @param comparator компаратор, по которому пройдёт сортировка.
-     */
-    private static void quickSortPerson(List<Person> list, int begin, int end,
-                                        Comparator<Person> comparator) {
-        if (end <= begin) {
-            return;
-        }
-        int pivot = partitionPerson(list, begin, end, comparator);
-        quickSortPerson(list, begin, pivot-1, comparator);
-        quickSortPerson(list, pivot+1, end, comparator);
-    }
-
-    /**
-     * QuickSort сортировка для List коллекции объектов типа Person
-     * с использованием компаратора для Person без рекурсии.
-     * Подходит для больших коллекций Person и работает с ними
-     * быстрее и без {@link StackOverflowError}.
-     * @param people коллекция List объектов Person
-     * @param comparator компаратор сравнения объектов Person
-     */
-    private static void qSortPerson(List<Person> people,
-                                    Comparator<Person> comparator) {
-        final int MAXSTACK = 20480; // максимальный размер стека
-        int i, j;   			// указатели, участвующие в разделении
-        int lb, ub;  		// границы сортируемого в цикле фрагмента
-        // стек запросов каждый запрос задается парой значений,
-        // а именно: левой(lbstack) и правой(ubstack)
-        // границами промежутка
-        int[] lbstack = new int[MAXSTACK];
-        int[] ubstack = new int[MAXSTACK];
-
-        int stackpos = 1;   	// текущая позиция стека
-        int ppos;            // середина массива
-        Person pivot;              // опорный элемент
-        Person temp;
-        lbstack[1] = 0;
-        ubstack[1] = people.size() - 1;
-        do {
-            // Взять границы lb и ub текущего массива из стека.
-            lb = lbstack[stackpos];
-            ub = ubstack[stackpos];
-            stackpos--;
-            do {
-                // Шаг 1. Разделение по элементу pivot
-                ppos = (lb + ub) / 2;
-                i = lb; j = ub; pivot = people.get(ppos);
-                do {
-                    while (comparator.compare(people.get(i), pivot) < 0) i++;
-                    while (comparator.compare(pivot, people.get(j)) < 0) j--;
-                    if (i <= j) {
-                        temp = people.get(i);
-                        people.set(i, people.get(j));
-                        people.set(j, temp);
-                        i++; j--;
-                    }
-                } while (i <= j);
-                // Сейчас указатель i указывает на начало правого подмассива,
-                // j - на конец левого (см. иллюстрацию выше), lb ? j ? i ? ub.
-                // Возможен случай, когда указатель
-                // i или j выходит за границу массива
-                // Шаги 2, 3. Отправляем большую часть в стек  и двигаем lb,ub
-                if (i < ppos) {     // правая часть больше
-                    if (i < ub) {     //  если в ней больше 1 элемента - нужно
-                        stackpos++;       //  сортировать, запрос в стек
-                        lbstack[stackpos] = i;
-                        ubstack[stackpos] = ub;
-                    }
-                    ub = j;             //  следующая итерация разделения
-                    //  будет работать с левой частью
-                } else {       	    // левая часть больше
-                    if (j > lb) {
-                        stackpos++;
-                        lbstack[stackpos] = lb;
-                        ubstack[stackpos] = j;
-                    }
-                    lb = i;
-                }
-            } while (lb < ub);      // пока в меньшей части более 1 элемента
-        } while (stackpos != 0);    // пока есть запросы в стеке
-    }
-
-    /**
-     * QuickSort сортировка для List коллекции объектов типа Animal
-     * с использованием компаратора для Animal без рекурсии.
-     * Подходит для больших коллекций Animal и работает с ними
-     * быстрее и без {@link StackOverflowError}.
-     * @param animals коллекция List объектов Animal
-     * @param comparator компаратор сравнения объектов Animal
-     */
-    private static void qSortAnimal(List<Animal> animals,
-                                    Comparator<Animal> comparator) {
-        final int MAXSTACK = 20480; // максимальный размер стека
-        int i, j;   			// указатели, участвующие в разделении
-        int lb, ub;  		// границы сортируемого в цикле фрагмента
-        // стек запросов каждый запрос задается парой значений,
-        // а именно: левой(lbstack) и правой(ubstack)
-        // границами промежутка
-        int[] lbstack = new int[MAXSTACK];
-        int[] ubstack = new int[MAXSTACK];
-
-        int stackpos = 1;   	// текущая позиция стека
-        int ppos;            // середина массива
-        Animal pivot;              // опорный элемент
-        Animal temp;
-        lbstack[1] = 0;
-        ubstack[1] = animals.size() - 1;
-        do {
-            // Взять границы lb и ub текущего массива из стека.
-            lb = lbstack[stackpos];
-            ub = ubstack[stackpos];
-            stackpos--;
-            do {
-                // Шаг 1. Разделение по элементу pivot
-                ppos = (lb + ub) / 2;
-                i = lb; j = ub; pivot = animals.get(ppos);
-                do {
-                    while (comparator.compare(animals.get(i), pivot) < 0) i++;
-                    while (comparator.compare(pivot, animals.get(j)) < 0) j--;
-                    if (i <= j) {
-                        temp = animals.get(i);
-                        animals.set(i, animals.get(j));
-                        animals.set(j, temp);
-                        i++; j--;
-                    }
-                } while (i <= j);
-                // Сейчас указатель i указывает на начало правого подмассива,
-                // j - на конец левого (см. иллюстрацию выше), lb ? j ? i ? ub.
-                // Возможен случай, когда указатель
-                // i или j выходит за границу массива
-                // Шаги 2, 3. Отправляем большую часть в стек  и двигаем lb,ub
-                if (i < ppos) {     // правая часть больше
-                    if (i < ub) {     //  если в ней больше 1 элемента - нужно
-                        stackpos++;       //  сортировать, запрос в стек
-                        lbstack[stackpos] = i;
-                        ubstack[stackpos] = ub;
-                    }
-                    ub = j;             //  следующая итерация разделения
-                    //  будет работать с левой частью
-                } else {       	    // левая часть больше
-                    if (j > lb) {
-                        stackpos++;
-                        lbstack[stackpos] = lb;
-                        ubstack[stackpos] = j;
-                    }
-                    lb = i;
-                }
-            } while (lb < ub);      // пока в меньшей части более 1 элемента
-        } while (stackpos != 0);    // пока есть запросы в стеке
-    }
+//    /**
+//     * Сортировка QuickSort для коллекций типа List c объектами Person
+//     * @param list List c объектами Person
+//     * @param begin индекс элемента начала сортировки
+//     * @param end индекс элемента окончания сортировки
+//     * @param comparator компаратор, по которому пройдёт сортировка.
+//     */
+//    private static void quickSortPerson(List<Person> list, int begin, int end,
+//                                        Comparator<Person> comparator) {
+//        if (end <= begin) {
+//            return;
+//        }
+//        int pivot = partitionPerson(list, begin, end, comparator);
+//        quickSortPerson(list, begin, pivot-1, comparator);
+//        quickSortPerson(list, pivot+1, end, comparator);
+//    }
+//
+//    /**
+//     * QuickSort сортировка для List коллекции объектов типа Person
+//     * с использованием компаратора для Person без рекурсии.
+//     * Подходит для больших коллекций Person и работает с ними
+//     * быстрее и без {@link StackOverflowError}.
+//     * @param people коллекция List объектов Person
+//     * @param comparator компаратор сравнения объектов Person
+//     */
+//    private static void qSortPerson(List<Person> people,
+//                                    Comparator<Person> comparator) {
+//        final int MAXSTACK = 20480; // максимальный размер стека
+//        int i, j;   			// указатели, участвующие в разделении
+//        int lb, ub;  		// границы сортируемого в цикле фрагмента
+//        // стек запросов каждый запрос задается парой значений,
+//        // а именно: левой(lbstack) и правой(ubstack)
+//        // границами промежутка
+//        int[] lbstack = new int[MAXSTACK];
+//        int[] ubstack = new int[MAXSTACK];
+//
+//        int stackpos = 1;   	// текущая позиция стека
+//        int ppos;            // середина массива
+//        Person pivot;              // опорный элемент
+//        Person temp;
+//        lbstack[1] = 0;
+//        ubstack[1] = people.size() - 1;
+//        do {
+//            // Взять границы lb и ub текущего массива из стека.
+//            lb = lbstack[stackpos];
+//            ub = ubstack[stackpos];
+//            stackpos--;
+//            do {
+//                // Шаг 1. Разделение по элементу pivot
+//                ppos = (lb + ub) / 2;
+//                i = lb; j = ub; pivot = people.get(ppos);
+//                do {
+//                    while (comparator.compare(people.get(i), pivot) < 0) i++;
+//                    while (comparator.compare(pivot, people.get(j)) < 0) j--;
+//                    if (i <= j) {
+//                        temp = people.get(i);
+//                        people.set(i, people.get(j));
+//                        people.set(j, temp);
+//                        i++; j--;
+//                    }
+//                } while (i <= j);
+//                // Сейчас указатель i указывает на начало правого подмассива,
+//                // j - на конец левого (см. иллюстрацию выше), lb ? j ? i ? ub.
+//                // Возможен случай, когда указатель
+//                // i или j выходит за границу массива
+//                // Шаги 2, 3. Отправляем большую часть в стек  и двигаем lb,ub
+//                if (i < ppos) {     // правая часть больше
+//                    if (i < ub) {     //  если в ней больше 1 элемента - нужно
+//                        stackpos++;       //  сортировать, запрос в стек
+//                        lbstack[stackpos] = i;
+//                        ubstack[stackpos] = ub;
+//                    }
+//                    ub = j;             //  следующая итерация разделения
+//                    //  будет работать с левой частью
+//                } else {       	    // левая часть больше
+//                    if (j > lb) {
+//                        stackpos++;
+//                        lbstack[stackpos] = lb;
+//                        ubstack[stackpos] = j;
+//                    }
+//                    lb = i;
+//                }
+//            } while (lb < ub);      // пока в меньшей части более 1 элемента
+//        } while (stackpos != 0);    // пока есть запросы в стеке
+//    }
+//
+//    /**
+//     * QuickSort сортировка для List коллекции объектов типа Animal
+//     * с использованием компаратора для Animal без рекурсии.
+//     * Подходит для больших коллекций Animal и работает с ними
+//     * быстрее и без {@link StackOverflowError}.
+//     * @param animals коллекция List объектов Animal
+//     * @param comparator компаратор сравнения объектов Animal
+//     */
+//    private static void qSortAnimal(List<Animal> animals,
+//                                    Comparator<Animal> comparator) {
+//        final int MAXSTACK = 20480; // максимальный размер стека
+//        int i, j;   			// указатели, участвующие в разделении
+//        int lb, ub;  		// границы сортируемого в цикле фрагмента
+//        // стек запросов каждый запрос задается парой значений,
+//        // а именно: левой(lbstack) и правой(ubstack)
+//        // границами промежутка
+//        int[] lbstack = new int[MAXSTACK];
+//        int[] ubstack = new int[MAXSTACK];
+//
+//        int stackpos = 1;   	// текущая позиция стека
+//        int ppos;            // середина массива
+//        Animal pivot;              // опорный элемент
+//        Animal temp;
+//        lbstack[1] = 0;
+//        ubstack[1] = animals.size() - 1;
+//        do {
+//            // Взять границы lb и ub текущего массива из стека.
+//            lb = lbstack[stackpos];
+//            ub = ubstack[stackpos];
+//            stackpos--;
+//            do {
+//                // Шаг 1. Разделение по элементу pivot
+//                ppos = (lb + ub) / 2;
+//                i = lb; j = ub; pivot = animals.get(ppos);
+//                do {
+//                    while (comparator.compare(animals.get(i), pivot) < 0) i++;
+//                    while (comparator.compare(pivot, animals.get(j)) < 0) j--;
+//                    if (i <= j) {
+//                        temp = animals.get(i);
+//                        animals.set(i, animals.get(j));
+//                        animals.set(j, temp);
+//                        i++; j--;
+//                    }
+//                } while (i <= j);
+//                // Сейчас указатель i указывает на начало правого подмассива,
+//                // j - на конец левого (см. иллюстрацию выше), lb ? j ? i ? ub.
+//                // Возможен случай, когда указатель
+//                // i или j выходит за границу массива
+//                // Шаги 2, 3. Отправляем большую часть в стек  и двигаем lb,ub
+//                if (i < ppos) {     // правая часть больше
+//                    if (i < ub) {     //  если в ней больше 1 элемента - нужно
+//                        stackpos++;       //  сортировать, запрос в стек
+//                        lbstack[stackpos] = i;
+//                        ubstack[stackpos] = ub;
+//                    }
+//                    ub = j;             //  следующая итерация разделения
+//                    //  будет работать с левой частью
+//                } else {       	    // левая часть больше
+//                    if (j > lb) {
+//                        stackpos++;
+//                        lbstack[stackpos] = lb;
+//                        ubstack[stackpos] = j;
+//                    }
+//                    lb = i;
+//                }
+//            } while (lb < ub);      // пока в меньшей части более 1 элемента
+//        } while (stackpos != 0);    // пока есть запросы в стеке
+//    }
 
     /**
      * Генерирует указанное в константе OBJECTS_AMOUNT количество
@@ -637,110 +663,252 @@ public class CollectionsMain {
         }
     }
 
+//    /**
+//     * QuickSort сортировка копии элементов в List для Set
+//     * коллекции объектов типа Animal
+//     * с использованием компаратора для Animal.
+//     * @param animals   Set коллекция Animal, List копия элементов
+//     *                  которой которой будет отсортирована.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void mySortWithTime(Set<Animal> animals,
+//                                      Comparator<Animal> comparator) {
+//        long startTime;
+//        long stopTime;
+//        ArrayList<Animal> bufCopy = new ArrayList<>(animals);
+//        startTime = System.currentTimeMillis();
+//        //sort(bufCopy, comparator);
+//        qSortAnimal(bufCopy, comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "сортировка своим методом List копии объектов из",
+//                animals, startTime, stopTime);
+//        bufCopy.clear();
+//    }
+
+//    /**
+//     * Стандартная сортировка List копии элементов из Set
+//     * коллекции объектов типа Animal.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void sortWithTime(Set<Animal> animals,
+//                                      Comparator<Animal> comparator) {
+//        long startTime;
+//        long stopTime;
+//        ArrayList<Animal> bufCopy = new ArrayList<>(animals);
+//        startTime = System.currentTimeMillis();
+//        bufCopy.sort(comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "стандартная сортировка копии объектов из",
+//                animals, startTime, stopTime);
+//        bufCopy.clear();
+//    }
+
+//    /**
+//     * QuickSort сортировка для List коллекции объектов типа Animal
+//     * с использованием компаратора для Animal и измерением времени
+//     * сортировки с последующим выводом сообщения о длительности
+//     * сортировки.
+//     * @param animals   коллекция для сортировки.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void mySortWithTime(List<Animal> animals,
+//                                      Comparator<Animal> comparator) {
+//        long startTime;
+//        long stopTime;
+//        startTime = System.currentTimeMillis();
+//        //sort(animals, comparator);
+//        qSortAnimal(animals, comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "сортировка своим методом объектов в",
+//                animals, startTime, stopTime);
+//    }
+
+//    /**
+//     * Стандартная сортировка для List коллекции объектов типа Animal
+//     * с использованием компаратора для Animal и измерением времени
+//     * сортировки с последующим выводом сообщения о длительности
+//     * сортировки.
+//     * @param animals   коллекция для сортировки.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void sortWithTime(List<Animal> animals,
+//                                      Comparator<Animal> comparator) {
+//        long startTime;
+//        long stopTime;
+//        startTime = System.currentTimeMillis();
+//        animals.sort(comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "стандартная сортировка объектов в",
+//                animals, startTime, stopTime);
+//    }
+
+//    /**
+//     * Пузырьковая сортировка для List коллекции объектов типа Animal.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void sort(List<Animal> animals,
+//                            Comparator<Animal> comparator) {
+//        Animal tmp;
+//        for (int i = 0; i < animals.size() - 1; i++) {
+//            for (int j = 0; j < animals.size() - 1; j++) {
+//                if (comparator.compare(animals.get(j),
+//                        animals.get(j + 1)) > 0) {
+//                    tmp = animals.get(j);
+//                    animals.set(j, animals.get(j + 1));
+//                    animals.set(j + 1, tmp);
+//                }
+//            }
+//        }
+//    }
+
+//        /**
+//     * Стандартная сортировка List копии элементов из Set
+//     * коллекции объектов типа Animal.
+//     * @param comparator объект с реализованным интерфейсом Comparator
+//     *                  для сравнения двух объектов типа Animal.
+//     */
+//    public static void sortWithTime(Set<Animal> animals,
+//                                    Comparator<Animal> comparator) {
+//        long startTime;
+//        long stopTime;
+//        ArrayList<Animal> bufCopy = new ArrayList<>(animals);
+//        startTime = System.currentTimeMillis();
+//        bufCopy.sort(comparator);
+//        stopTime = System.currentTimeMillis();
+//        printOperationCollectionNameTime(
+//                "стандартная сортировка копии объектов из",
+//                animals, startTime, stopTime);
+//        bufCopy.clear();
+//    }
+
+    /**
+     * QuickSort сортировка для List коллекции объектов
+     * с использованием компаратора и измерением времени
+     * сортировки с последующим выводом сообщения о длительности
+     * сортировки.
+     * @param entities   коллекция для сортировки.
+     * @param comparator объект с реализованным интерфейсом Comparator
+     *                  для сравнения двух объектов типа T.
+     */
+    public static <T> void mySortWithTimeGeneric(List<T> entities,
+            Comparator<T> comparator, boolean useEmbeddedSort) {
+        long startTime;
+        long stopTime;
+        String message;
+        startTime = System.currentTimeMillis();
+        if (useEmbeddedSort) {
+            entities.sort(comparator);
+            message = "стандартная сортировка объектов в";
+        } else {
+            qSortGeneric(entities, comparator);
+            message = "сортировка своим методом объектов в";
+        }
+        stopTime = System.currentTimeMillis();
+        printOperationCollectionNameTime(
+                message, entities, startTime, stopTime);
+    }
+
     /**
      * QuickSort сортировка копии элементов в List для Set
-     * коллекции объектов типа Animal
-     * с использованием компаратора для Animal.
-     * @param animals   Set коллекция Animal, List копия элементов
+     * коллекции объектов с использованием компаратора.
+     * @param entities   Set коллекция, List копия элементов
      *                  которой которой будет отсортирована.
      * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Animal.
+     *                  для сравнения двух объектов.
      */
-    public static void mySortWithTime(Set<Animal> animals,
-                                      Comparator<Animal> comparator) {
+    public static <T> void mySortWithTimeGeneric(Set<T> entities,
+            Comparator<T> comparator, boolean useEmbeddedSort) {
         long startTime;
         long stopTime;
-        ArrayList<Animal> bufCopy = new ArrayList<>(animals);
+        String message;
+        ArrayList<T> bufCopy = new ArrayList<>(entities);
         startTime = System.currentTimeMillis();
-        //sort(bufCopy, comparator);
-        qSortAnimal(bufCopy, comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "сортировка своим методом List копии объектов из",
-                animals, startTime, stopTime);
-        bufCopy.clear();
-    }
-
-    /**
-     * Стандартная сортировка List копии элементов из Set
-     * коллекции объектов типа Animal.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Animal.
-     */
-    public static void sortWithTime(Set<Animal> animals,
-                                      Comparator<Animal> comparator) {
-        long startTime;
-        long stopTime;
-        ArrayList<Animal> bufCopy = new ArrayList<>(animals);
-        startTime = System.currentTimeMillis();
-        bufCopy.sort(comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "стандартная сортировка копии объектов из",
-                animals, startTime, stopTime);
-        bufCopy.clear();
-    }
-
-    /**
-     * QuickSort сортировка для List коллекции объектов типа Animal
-     * с использованием компаратора для Animal и измерением времени
-     * сортировки с последующим выводом сообщения о длительности
-     * сортировки.
-     * @param animals   коллекция для сортировки.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Animal.
-     */
-    public static void mySortWithTime(List<Animal> animals,
-                                      Comparator<Animal> comparator) {
-        long startTime;
-        long stopTime;
-        startTime = System.currentTimeMillis();
-        //sort(animals, comparator);
-        qSortAnimal(animals, comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "сортировка своим методом объектов в",
-                animals, startTime, stopTime);
-    }
-
-    /**
-     * Стандартная сортировка для List коллекции объектов типа Animal
-     * с использованием компаратора для Animal и измерением времени
-     * сортировки с последующим выводом сообщения о длительности
-     * сортировки.
-     * @param animals   коллекция для сортировки.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Animal.
-     */
-    public static void sortWithTime(List<Animal> animals,
-                                      Comparator<Animal> comparator) {
-        long startTime;
-        long stopTime;
-        startTime = System.currentTimeMillis();
-        animals.sort(comparator);
-        stopTime = System.currentTimeMillis();
-        printOperationCollectionNameTime(
-                "стандартная сортировка объектов в",
-                animals, startTime, stopTime);
-    }
-
-    /**
-     * Пузырьковая сортировка для List коллекции объектов типа Animal.
-     * @param comparator объект с реализованным интерфейсом Comparator
-     *                  для сравнения двух объектов типа Animal.
-     */
-    public static void sort(List<Animal> animals,
-                            Comparator<Animal> comparator) {
-        Animal tmp;
-        for (int i = 0; i < animals.size() - 1; i++) {
-            for (int j = 0; j < animals.size() - 1; j++) {
-                if (comparator.compare(animals.get(j),
-                        animals.get(j + 1)) > 0) {
-                    tmp = animals.get(j);
-                    animals.set(j, animals.get(j + 1));
-                    animals.set(j + 1, tmp);
-                }
-            }
+        if (useEmbeddedSort) {
+            bufCopy.sort(comparator);
+            message = "стандартная сортировка копии объектов из";
+        } else {
+            qSortGeneric(bufCopy, comparator);
+            message = "сортировка своим методом копии объектов из";
         }
+        stopTime = System.currentTimeMillis();
+        printOperationCollectionNameTime(
+                message, entities, startTime, stopTime);
+        bufCopy.clear();
+    }
+
+    /**
+     * QuickSort сортировка для List коллекции
+     * с использованием компаратора и без рекурсии.
+     * @param entities коллекция List объектов T
+     * @param comparator компаратор сравнения объектов T
+     */
+    private static <T> void qSortGeneric(List<T> entities,
+            Comparator<T> comparator) {
+        final int MAXSTACK = 20480; // максимальный размер стека
+        int i, j;   			// указатели, участвующие в разделении
+        int lb, ub;  		// границы сортируемого в цикле фрагмента
+        // стек запросов каждый запрос задается парой значений,
+        // а именно: левой(lbstack) и правой(ubstack)
+        // границами промежутка
+        int[] lbstack = new int[MAXSTACK];
+        int[] ubstack = new int[MAXSTACK];
+
+        int stackpos = 1;   	// текущая позиция стека
+        int ppos;            // середина массива
+        T pivot;              // опорный элемент
+        T temp;
+        lbstack[1] = 0;
+        ubstack[1] = entities.size() - 1;
+        do {
+            // Взять границы lb и ub текущего массива из стека.
+            lb = lbstack[stackpos];
+            ub = ubstack[stackpos];
+            stackpos--;
+            do {
+                // Шаг 1. Разделение по элементу pivot
+                ppos = (lb + ub) / 2;
+                i = lb; j = ub; pivot = entities.get(ppos);
+                do {
+                    while (comparator.compare(entities.get(i), pivot) < 0) i++;
+                    while (comparator.compare(pivot, entities.get(j)) < 0) j--;
+                    if (i <= j) {
+                        temp = entities.get(i);
+                        entities.set(i, entities.get(j));
+                        entities.set(j, temp);
+                        i++; j--;
+                    }
+                } while (i <= j);
+                // Сейчас указатель i указывает на начало правого подмассива,
+                // j - на конец левого (см. иллюстрацию выше), lb ? j ? i ? ub.
+                // Возможен случай, когда указатель
+                // i или j выходит за границу массива
+                // Шаги 2, 3. Отправляем большую часть в стек  и двигаем lb,ub
+                if (i < ppos) {     // правая часть больше
+                    if (i < ub) {     //  если в ней больше 1 элемента - нужно
+                        stackpos++;       //  сортировать, запрос в стек
+                        lbstack[stackpos] = i;
+                        ubstack[stackpos] = ub;
+                    }
+                    ub = j;             //  следующая итерация разделения
+                    //  будет работать с левой частью
+                } else {       	    // левая часть больше
+                    if (j > lb) {
+                        stackpos++;
+                        lbstack[stackpos] = lb;
+                        ubstack[stackpos] = j;
+                    }
+                    lb = i;
+                }
+            } while (lb < ub);      // пока в меньшей части более 1 элемента
+        } while (stackpos != 0);    // пока есть запросы в стеке
     }
 }
