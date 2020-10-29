@@ -4,7 +4,7 @@ import oop.ETypeMan;
 
 import java.util.Iterator;
 
-public class Man implements Comparable<Man>/*, Iterable<Man>*/ {
+public class Man implements Comparable<Man> {
     private String name;
     private int hairLength;
     private int yearOld;

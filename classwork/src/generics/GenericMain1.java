@@ -2,6 +2,7 @@ package generics;
 
 import generics.dto.BoxObject;
 import oop.calc.dto.CalcWithOperator;
+import oop.calc.dto.Fizik;
 
 public class GenericMain1 {
     public static void main(String[] args) {

@@ -15,14 +15,13 @@ public class ListMain4 {
         System.out.println(data);
 
         Iterator<Integer> iterator = data.iterator();
-        //not ok
-//        data.add(55555);
-        //ok
-//        data.set(3, 5555);
-        //not ok
+
+        data.set(3, 555555);
+
 //        data.remove(1000);
-//        data.add(9999);
-        //have no influence on iterator
+
+//        data.add(9999999);
+
         data = new LinkedList<>();
 
         while (iterator.hasNext()){

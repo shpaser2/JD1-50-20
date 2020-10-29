@@ -12,25 +12,9 @@ import java.util.List;
 
 public class BankMain {
     public static void main(String[] args) {
-        //better for less ROM usage (can be used
-        // when getAllPassports called seldom.
 //        Bank bank = new Bank(new MapBankStorage());
-        
-        //better for RAM when getAllPassports called often.
         Bank bank = new Bank(new MapBankStorageNew());
-        
-//        //describe what you want to do with bank
-//        bank.saveNewClient(passport);
-//
-//        bank.getClient(id);
-//
-//        bank.getPassportsByClientId(id);
-//
-//        bank.getPassports();
-//        //firstly separate unique and not unique data in business logic
-//        //Second: all that we do must have interface.
-//        // For example usage must be through interface layer.
-    
+
         Passport passport = new Passport();
         passport.setId("123542678");
         passport.setName("Илья");
