@@ -147,7 +147,7 @@ public class ProcessDate {
         start.setTime(startDate);
         Calendar end = Calendar.getInstance();
         end.setTime(endDate);
-
+        end.add(Calendar.DATE, 1);  //add 1 day to the end date
         for (Date date = start.getTime();
                  start.before(end);
                  start.add(Calendar.DATE, 1), date = start.getTime()) {
