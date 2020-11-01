@@ -2,8 +2,7 @@ package homework8.SiteLoader;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static homework8.SiteLoader.TransformDate.transformCurrentDate;
-import static homework8.SiteLoader.TransformDate.transformDate;
+import static homework8.SiteLoader.ProcessDate.transformCurrentDate;
 
 public class BABLoader extends SiteLoader{
 

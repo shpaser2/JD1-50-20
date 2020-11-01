@@ -1,5 +1,6 @@
 package homework8.SiteLoader;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -11,6 +12,7 @@ public class Test {
                 printRates(new NBRBLoader());
                 break;
             case 2:
+                System.out.println("продажа, БелАгропромБанк");
                 loadRatesBAB();
                 break;
             case 3:
@@ -31,29 +33,42 @@ public class Test {
                 + loader.load(SiteLoader.Currency.USD));
     }
 
-    private static void printRates(BABLoader loader, String date){
-        System.out.println(SiteLoader.Currency.EUR.toString() + " "
-                + loader.load(SiteLoader.Currency.EUR, date));
-        System.out.println(SiteLoader.Currency.RUB.toString() + " "
-                + loader.load(SiteLoader.Currency.RUB, date));
-        System.out.println(SiteLoader.Currency.USD.toString() + " "
-                + loader.load(SiteLoader.Currency.USD, date));
-    }
-
-    private static void loadRatesBAB() {
-        String date;
-        String stringWithDate;
-        Scanner console = new Scanner(System.in);
-        do {
-            System.out.println("Введите дату для отображения курса");
-            stringWithDate = console.nextLine();
-            date = TransformDate.transformDate(stringWithDate);
-        } while(date == null);
-        System.out.println("продажа, БелАгропромБанк");
-        if (TransformDate.isWeekend(date, "MM/dd/yyyy")) {
+    private static void printRates(BABLoader loader, String date,
+                                   String bankDateFormat){
+        if (ProcessDate.isWeekend(date, bankDateFormat)) {
             System.out.println("Это выходной день. Актуальные курсы не доступны");
         } else {
-            printRates(new BABLoader(), date);
+            System.out.println(SiteLoader.Currency.EUR.toString() + " "
+                    + loader.load(SiteLoader.Currency.EUR, date));
+            System.out.println(SiteLoader.Currency.RUB.toString() + " "
+                    + loader.load(SiteLoader.Currency.RUB, date));
+            System.out.println(SiteLoader.Currency.USD.toString() + " "
+                    + loader.load(SiteLoader.Currency.USD, date));
+        }
+    }
+
+    //1 - получаем дату старта и окончания просмотра курсов валют
+    //2 - получаем лист дат в том же формате, в каком был ввод
+    //3 - преобразуем в формат для банка
+    //4 - выводим в консоль курс на диапазон дат
+    private static void loadRatesBAB() {
+        String[] dates = new String[2];
+        String dateFormatSource = "dd.MM.yyyy";
+        String dateFormatBank = "MM/dd/yyyy";
+        //1
+        ProcessDate.inputStartEndDates(dates, dateFormatSource);
+        //2
+        List<String> allDates =
+                ProcessDate.allDatesInRange(dates, dateFormatSource);
+        //3
+        for (int i = 0; i < allDates.size(); i++) {
+            allDates.set(i, ProcessDate.transformDate(allDates.get(i),
+                    dateFormatSource, dateFormatBank));
+        }
+        //4
+        for (String allDate : allDates) {
+            ProcessDate.printDate(allDate, dateFormatBank, dateFormatSource);
+            printRates(new BABLoader(), allDate, dateFormatBank);
         }
     }
 
@@ -85,19 +100,4 @@ public class Test {
                 "на сегодня.");
     }
 
-//    private static void loadRatesInRange() {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//        Date startDate = formatter.parse("2010-12-20");
-//        Date endDate = formatter.parse("2010-12-26");
-//
-//        Calendar start = Calendar.getInstance();
-//        start.setTime(startDate);
-//        Calendar end = Calendar.getInstance();
-//        end.setTime(endDate);
-//
-//        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-//            // Do your job here with `date`.
-//            System.out.println(date);
-//        }
-//    }
 }
