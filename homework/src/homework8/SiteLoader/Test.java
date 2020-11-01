@@ -9,7 +9,7 @@ public class Test {
         switch (chooseBank()) {
             case 1:
                 System.out.println("продажа, НБРБ");
-                printRates(new NBRBLoader());
+                loadRatesNBRB();
                 break;
             case 2:
                 System.out.println("продажа, БелАгропромБанк");
@@ -47,31 +47,63 @@ public class Test {
         }
     }
 
+    private static void printRates(NBRBLoader loader, String date,
+                                   String bankDateFormat){
+            System.out.println(SiteLoader.Currency.EUR.toString() + " "
+                    + loader.load(SiteLoader.Currency.EUR, date));
+            System.out.println(SiteLoader.Currency.RUB.toString() + " "
+                    + loader.load(SiteLoader.Currency.RUB, date));
+            System.out.println(SiteLoader.Currency.USD.toString() + " "
+                    + loader.load(SiteLoader.Currency.USD, date));
+    }
+
+    //1 - подготавливаем даты для запросов курсов в банк.
+    //2 - выводим в консоль курс на диапазон дат.
+    // Например 13.10.2020-23.10.2020 или 13.10.2020,23.10.2020.
+    // Последнее число включительно.
+    private static void loadRatesNBRB() {
+        String dfsource = "dd.MM.yyyy";
+        String dfbank = "yyyy-MM-dd";
+        //1
+        List<String> allDates = prepareDates(dfsource,
+                dfbank);
+        //2
+        for (String allDate : allDates) {
+            ProcessDate.printDate(allDate, dfbank, dfsource);
+            printRates(new NBRBLoader(), allDate, dfbank);
+        }
+    }
+
+    private static void loadRatesBAB() {
+        String dfsource = "dd.MM.yyyy";
+        String dfbank = "MM/dd/yyyy";
+        //1
+        List<String> allDates = prepareDates(dfsource,
+                dfbank);
+        //2
+        for (String allDate : allDates) {
+            ProcessDate.printDate(allDate, dfbank, dfsource);
+            printRates(new BABLoader(), allDate, dfbank);
+        }
+    }
+
     //1 - получаем дату старта и окончания просмотра курсов валют
     //2 - получаем лист дат в том же формате, в каком был ввод
     //3 - преобразуем в формат для банка
-    //4 - выводим в консоль курс на диапазон дат.
-    // Например 13.10.2020-23.10.2020 или 13.10.2020,23.10.2020.
-    // Последнее число включительно.
-    private static void loadRatesBAB() {
+    private static List<String> prepareDates(String dfsource,
+                                             String dfbank) {
         String[] dates = new String[2];
-        String dateFormatSource = "dd.MM.yyyy";
-        String dateFormatBank = "MM/dd/yyyy";
         //1
-        ProcessDate.inputStartEndDates(dates, dateFormatSource);
+        ProcessDate.inputStartEndDates(dates, dfsource);
         //2
         List<String> allDates =
-                ProcessDate.allDatesInRange(dates, dateFormatSource);
+                ProcessDate.allDatesInRange(dates, dfsource);
         //3
         for (int i = 0; i < allDates.size(); i++) {
             allDates.set(i, ProcessDate.transformDate(allDates.get(i),
-                    dateFormatSource, dateFormatBank));
+                    dfsource, dfbank));
         }
-        //4
-        for (String allDate : allDates) {
-            ProcessDate.printDate(allDate, dateFormatBank, dateFormatSource);
-            printRates(new BABLoader(), allDate, dateFormatBank);
-        }
+        return allDates;
     }
 
     public static int chooseBank() {

@@ -12,7 +12,13 @@ public class NBRBLoader extends SiteLoader{
      */
     @Override
     public double load(SiteLoader.Currency currencyName) {
-        return load("https://www.nbrb.by/api/exrates/rates/" + currencyName.getId(), currencyName);
+        return load("https://www.nbrb.by/api/exrates/rates/"
+                + currencyName.getId() + "?ondate=2020-10-27", currencyName);
+    }
+
+    public double load(SiteLoader.Currency currencyName, String date) {
+        return load("https://www.nbrb.by/api/exrates/rates/"
+                + currencyName.getId() + "?ondate=" + date, currencyName);
     }
 
     /**
@@ -23,8 +29,8 @@ public class NBRBLoader extends SiteLoader{
      */
     @Override
     protected double handle(String content, SiteLoader.Currency currencyName) {
-        //TODO дописываем код сюда
-        int currencyIndex = content.indexOf("Cur_OfficialRate\":") + "Cur_OfficialRate\":".length();
+        int currencyIndex = content.indexOf("Cur_OfficialRate\":")
+                + "Cur_OfficialRate\":".length();
         String buf = content.substring(currencyIndex);
         buf = buf.replace('}',' ');
         buf = buf.replace('{',' ');

@@ -15,17 +15,17 @@ public class BABLoader extends SiteLoader{
     public double load(Currency currencyName) {
         String date = transformCurrentDate();
         //weekend not works with BelAgroBank
-//        return load("https://belapb.by/ExCardsDaily.php?ondate=" + date, currencyName);
+//        return load("https://belapb.by/ExCardsDaily.php?ondate=08/22/2020",
+//              currencyName);
         //weekday works good
-        return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020", currencyName);
+        return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020",
+                currencyName);
     }
 
-    
+    //weekend not works with BelAgroBank
     public double load(Currency currencyName, String date) {
-        //weekend not works with BelAgroBank
-        return load("https://belapb.by/ExCardsDaily.php?ondate=" + date, currencyName);
-        //weekday works good
-//        return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020", currencyName);
+        return load("https://belapb.by/ExCardsDaily.php?ondate="
+                + date, currencyName);
     }
 
     /**
@@ -40,26 +40,33 @@ public class BABLoader extends SiteLoader{
         Pattern pattern;
         switch (currencyName) {
             case USD:
-                pattern = Pattern.compile(Currency.USD.toString().concat(commonPattern));
+                pattern = Pattern.compile(Currency.USD.toString()
+                        .concat(commonPattern));
                 break;
             case EUR:
-                pattern = Pattern.compile(Currency.EUR.toString().concat(commonPattern));
+                pattern = Pattern.compile(Currency.EUR.toString()
+                        .concat(commonPattern));
                 break;
             case RUB:
-                pattern = Pattern.compile(Currency.RUB.toString().concat(commonPattern));
+                pattern = Pattern.compile(Currency.RUB.toString()
+                        .concat(commonPattern));
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + currencyName);
+                throw new IllegalStateException("Unexpected value: "
+                        + currencyName);
         }
         Matcher matcher = pattern.matcher(content);
         String answer;
         if (!matcher.find()) {
-            answer = "Это выходной день или он ещё не наступил. Актуальные курсы не доступны";
+            answer = "Это выходной день или он ещё не наступил. " +
+                    "\n Актуальные курсы не доступны";
             System.out.println(answer);
             return -1;
         } else {
             answer = content.substring(matcher.start(), matcher.end())
-                    .replaceAll("([a-zA-Z]+)?(\\<[\\w\\/\\s]+\\>)(\\d+\\<[\\w\\/\\s]+\\>)?", "");
+                    .replaceAll(
+                    "([a-zA-Z]+)?(\\<[\\w\\/\\s]+\\>)(\\d+\\<[\\w\\/\\s]+\\>)?",
+                    "");
             return Double.parseDouble(answer);
         }
     }
