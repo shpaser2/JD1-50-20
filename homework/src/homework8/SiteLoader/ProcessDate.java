@@ -103,8 +103,8 @@ public class ProcessDate {
      */
     public static void inputStartEndDates(String[] startEndDates, String df) {
         String stringWithDate;
-        String startDateStr;
-        String endDateStr;
+        String oneDate;
+        String anotherDate;
         Scanner console = new Scanner(System.in);
         do {
             System.out.println("Введите дату для отображения курса");
@@ -113,29 +113,35 @@ public class ProcessDate {
             int comma = stringWithDate.indexOf(',');
             int hyphen = stringWithDate.indexOf('-');
             if (comma == 10 && stringWithDate.length() == 21) {
-                startDateStr = stringWithDate.substring(0, comma);
-                endDateStr = stringWithDate.substring(comma + 1);
+                oneDate = stringWithDate.substring(0, comma);
+                anotherDate = stringWithDate.substring(comma + 1);
             } else if (hyphen  == 10 && stringWithDate.length() == 21) {
-                startDateStr = stringWithDate.substring(0, hyphen);
-                endDateStr = stringWithDate.substring(hyphen + 1);
+                oneDate = stringWithDate.substring(0, hyphen);
+                anotherDate = stringWithDate.substring(hyphen + 1);
             } else {
-                startDateStr = stringWithDate;
-                endDateStr = startDateStr;
+                oneDate = stringWithDate;
+                anotherDate = oneDate;
             }
-            startEndDates[0] = startDateStr;
-            startEndDates[1] = endDateStr;
-        } while (!ProcessDate.isValid(startDateStr, df)
-                    || !ProcessDate.isValid(endDateStr, df));
+            startEndDates[0] = oneDate;
+            startEndDates[1] = anotherDate;
+        } while (!ProcessDate.isValid(oneDate, df)
+                    || !ProcessDate.isValid(anotherDate, df));
     }
 
+    //1 - парсинг даты со строки.
+    //2 - определение ранней и поздней даты.
+    //3 - создание списка с датами от ранней к поздней.
     public static List<String> allDatesInRange(String[] datesArr, String df) {
         SimpleDateFormat formatter = new SimpleDateFormat(df);
         List<String> dates = new ArrayList<>();
         Date startDate = new Date();
         Date endDate = startDate;
+        Date date1 = startDate;
+        Date date2 = startDate;
+        //1
         try {
-            startDate = formatter.parse(datesArr[0]);
-            endDate = formatter.parse(datesArr[1]);
+            date1 = formatter.parse(datesArr[0]);
+            date2 = formatter.parse(datesArr[1]);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
@@ -143,6 +149,15 @@ public class ProcessDate {
             dates.add(formatter.format(new Date()));
             return dates;
         }
+        //2
+        if (date1.compareTo(date2) > 0) {
+            startDate = date2;
+            endDate = date1;
+        } else {
+            startDate = date1;
+            endDate = date2;
+        }
+        //3
         Calendar start = Calendar.getInstance();
         start.setTime(startDate);
         Calendar end = Calendar.getInstance();
