@@ -1,12 +1,9 @@
 package homework8.SiteLoader;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static homework8.SiteLoader.TransformDate.transformCurrentDate;
+import static homework8.SiteLoader.TransformDate.transformDate;
 
 public class BABLoader extends SiteLoader{
 
@@ -17,11 +14,19 @@ public class BABLoader extends SiteLoader{
      */
     @Override
     public double load(Currency currencyName) {
-        String date = transformDate();
+        String date = transformCurrentDate();
         //weekend not works with BelAgroBank
 //        return load("https://belapb.by/ExCardsDaily.php?ondate=" + date, currencyName);
         //weekday works good
         return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020", currencyName);
+    }
+
+    
+    public double load(Currency currencyName, String date) {
+        //weekend not works with BelAgroBank
+        return load("https://belapb.by/ExCardsDaily.php?ondate=" + date, currencyName);
+        //weekday works good
+//        return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020", currencyName);
     }
 
     /**
@@ -58,23 +63,5 @@ public class BABLoader extends SiteLoader{
                     .replaceAll("([a-zA-Z]+)?(\\<[\\w\\/\\s]+\\>)(\\d+\\<[\\w\\/\\s]+\\>)?", "");
             return Double.parseDouble(answer);
         }
-    }
-
-    /**
-     * Преобразует текущую дату в формат, необходимый для составления
-     * запроса курса валют.
-     * @return строка с датой в необходимом формате.
-     */
-    private String transformDate() {
-        Date currentDate = new Date();
-        DateFormat dffrom = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-        DateFormat dfto = new SimpleDateFormat("MM/dd/YYYY");
-        Date today = null;
-        try {
-            today = dffrom.parse(currentDate.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return dfto.format(today);
     }
 }
