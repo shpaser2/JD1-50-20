@@ -23,7 +23,7 @@ public class FilesHandling {
         String answer = scanner.nextLine();
         int result = answer.indexOf('1');
         if (result > -1) {
-            Banks bank = getBankNumber();
+            Banks bank = getBank();
             switch (bank) {
                 case NBRB:
                     PrintRates.printRatesTree(getRatesNBRB());
@@ -43,7 +43,7 @@ public class FilesHandling {
         Banks bankBuf = Banks.UNKNOWN;
         File f = new File(path);
         if (f.length() == 0) {
-            bankBuf = getBankNumber();
+            bankBuf = getBank();
         } else {
             try (FileInputStream fis = new FileInputStream(path);
                  ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -58,16 +58,19 @@ public class FilesHandling {
                 e.printStackTrace();
             }
         }
-        return bankBuf.equals(bank) ? true : false;
+        return bankBuf.equals(bank);
     }
 
-    //пробный путь - C:\IntellijWorkspace\JD1-50-20\homework\src\homework8\SiteLoader\rates.txt
+
     //1 - проверка пути,
-    //ломается при ch < '\u0020' || "<>:\"|?*".indexOf(ch) != -1
+    //cломается при ch < '\u0020' || "<>:\"|?*".indexOf(ch) != -1
     public static void enterPathToRates() {
-        boolean allowWrite = false;
-        Path usedPath = Paths.get("");
-        Banks bank = getBankNumber();
+        boolean allowWrite;
+        Path usedPath;
+        Banks bank = getBank();
+        if (bank == Banks.BPS || bank == Banks.UNKNOWN) {
+            return;     //Next lines not works with BPS or UNKNOWN bank
+        }
         int attempts = 0;
         final int ATTEMPTS_LIMIT = 5;
         do {
@@ -93,7 +96,7 @@ public class FilesHandling {
                 System.out.println("файл содержит курсы другого банка");
             }
         } while (!allowWrite && attempts < ATTEMPTS_LIMIT);
-        if (attempts >= ATTEMPTS_LIMIT && !allowWrite) {
+        if (attempts >= ATTEMPTS_LIMIT) {
             throw new IllegalArgumentException("Код ошибки: -42");
         }
         setFilePath(usedPath.toString());
@@ -117,7 +120,7 @@ public class FilesHandling {
                 .replace('/', '\\');
         String all = root + src + pckg;
         String separatorRegex = "\\" + File.separator;
-        all = all.replaceAll("/|\\.|\\\\", separatorRegex);
+        all = all.replaceAll("[/.\\\\]", separatorRegex);
         return all;
     }
 
@@ -143,13 +146,9 @@ public class FilesHandling {
                 }
                 path = path + File.separator + fileName;
                 dest = Paths.get(path);
-                if (!Files.exists(dest)) {
-                    Files.createFile(dest);
-                }
-            } else {
-                if (!Files.exists(dest)) {
-                    Files.createFile(dest);
-                }
+            }
+            if (!Files.exists(dest)) {
+                Files.createFile(dest);
             }
             return dest;
         } catch (IOException e) {
@@ -175,6 +174,10 @@ public class FilesHandling {
     }
 
     public static void readAllFile() {
+        Banks bank = Test.getBank();
+        if (bank == Banks.BPS || bank == Banks.UNKNOWN) {
+            return;     //Next lines not works with BPS or UNKNOWN bank
+        }
         File f = new File(getFilePath());
         if (f.length() == 0) {
             return;
@@ -184,7 +187,7 @@ public class FilesHandling {
             Integer bankNumber = ois.readInt();
 
             for (Banks b : Banks.values()) {
-                if (bankNumber == b.getNumber()) {
+                if (bankNumber.equals(b.getNumber())) {
                     System.out.println("Работаем сохраненными курсами банка "
                             + b);
                     break;
@@ -193,12 +196,12 @@ public class FilesHandling {
 
             TreeMap<Date, HashMap<String, Double>> rates  =
                     (TreeMap<Date, HashMap<String, Double>>) ois.readObject();
-            if (bankNumber == Banks.NBRB.getNumber()) {
+            if (bankNumber.equals(Banks.NBRB.getNumber())) {
                 TreeMap<Date, HashMap<String, Double>> nbrb =
                         getRatesNBRB();
                 nbrb.putAll(rates);
                 Test.setRatesNBRB(nbrb);
-            } else if (bankNumber == Banks.BAB.getNumber()) {
+            } else if (bankNumber.equals(Banks.BAB.getNumber())) {
                 TreeMap<Date, HashMap<String, Double>> bab =
                         Test.getRatesBAB();
                 bab.putAll(rates);

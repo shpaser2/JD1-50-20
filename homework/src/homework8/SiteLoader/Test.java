@@ -45,9 +45,9 @@ public class Test {
     }
 
     private static void workWithBanks() {
-        TreeMap<Date, HashMap<String, Double>> rates = null;
-        Banks bank = Test.getBankNumber();
-        boolean allowWrite = false;
+        TreeMap<Date, HashMap<String, Double>> rates;
+        Banks bank = Test.getBank();
+        boolean allowWrite;
         switch (bank) {
             case NBRB:
                 System.out.println("\n продажа, НБРБ");
@@ -214,7 +214,7 @@ public class Test {
         Test.filePath = filePath;
     }
 
-    public static Banks getBankNumber() {
+    public static Banks getBank() {
         return bankNumber;
     }
 

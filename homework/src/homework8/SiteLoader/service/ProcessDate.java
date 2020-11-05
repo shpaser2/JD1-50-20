@@ -16,7 +16,7 @@ public class ProcessDate {
         Date currentDate = new Date();
         DateFormat dffrom = new SimpleDateFormat(
                 "EEE MMM dd HH:mm:ss zzz yyyy");
-        DateFormat dfto = new SimpleDateFormat("MM/dd/YYYY");
+        DateFormat dfto = new SimpleDateFormat("MM/dd/yyyy");
         Date today = null;
         try {
             today = dffrom.parse(currentDate.toString());
