@@ -50,7 +50,7 @@ public class WarAndPeace {
         //2.0 и 4.2*
         String patternString = "([А-Яа-яЁёA-Za-z\\d]+-{0,2}[А-Яа-яЁёA-Za-z]*)";
         List<String> arrWords = new ArrayList<>();
-        Pattern pattern = Pattern.compile(patternString);
+        Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(book);
         String tmp;
         while (matcher.find()) {
@@ -123,7 +123,13 @@ public class WarAndPeace {
         for (Map.Entry<String, Integer> entry : topWordsCount.entrySet()) {
             keysWords.add(entry.getKey());
         }
-        for (int i = keysWords.size() - 1; i >= keysWords.size() - 11; i--) {
+        //коллекция отсортирована по возрастанию, выводим последние,
+        // максимальные 10 значений начиная с максимального
+        // по значению - с последнего.
+        final int MAX_INDEX = keysWords.size() - 1;
+        final int TOP_QUANTITY = 10;
+        final int SMALLEST_IN_TOP = MAX_INDEX - TOP_QUANTITY;
+        for (int i = MAX_INDEX; i >= SMALLEST_IN_TOP; i--) {
             System.out.println(keysWords.get(i)
                 + "\t" + topWordsCount.get(keysWords.get(i)).toString()
                 + " раз");
