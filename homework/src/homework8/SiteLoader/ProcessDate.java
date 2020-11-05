@@ -178,4 +178,15 @@ public class ProcessDate {
             System.out.println(transformDate(date, dfsource, dfprint));
         }
     }
+
+    public static Date stringToDate(String dateStr, String dfsource) {
+        DateFormat dffrom = new SimpleDateFormat(dfsource);
+        Date date = null;
+        try {
+            date = dffrom.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }
