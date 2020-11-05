@@ -8,11 +8,30 @@ import java.util.*;
 
 import static homework8.SiteLoader.service.FilesHandling.*;
 
-//dates for test 23.09.2020-29.09.2020 03.10.2020-13.10.2020
-
+/**
+ * Класс показывает работу приложения для запроса банковских
+ * курсов на конкретную дату или на диапазон дат.
+ * Запрос на дату или диапазон дат работает для двух банков - НБРБ
+ * и БелАгроПромБанка.
+ *
+ * При запуске просит указать путь до файла.
+ * Проверяется путь на наличие файла rates.txt или на директорию,
+ * где есть файл rates.txt. Если по указанному пути нет rates.txt
+ * или нет папок с таким путем, тогда создаются все директории
+ * и поддиректории из указанного пути и в папке по указанному пути
+ * создается rates.txt. Если путь не был задан, тогда файл с курсами
+ * создается в папке с исходниками проекта.
+ *
+ * Если выбрана работа с другим в отличие от сохраненных курсов в
+ * rates.txt банком, то 5 раз будет предложено выбрать другой путь
+ * для сохранения курсов от другого банка. После 5 неудачных попыток
+ * работа программы будет завершена с кодом ошибки -42.
+ */
 public class Test {
-    private static TreeMap<Date, HashMap<String, Double>> ratesBAB = new TreeMap<>();
-    private static TreeMap<Date, HashMap<String, Double>> ratesNBRB = new TreeMap<>();
+    private static TreeMap<Date, HashMap<String,
+            Double>> ratesBAB = new TreeMap<>();
+    private static TreeMap<Date, HashMap<String,
+            Double>> ratesNBRB = new TreeMap<>();
     private static Banks bankNumber;
     private static String filePath;
 
@@ -43,6 +62,7 @@ public class Test {
                 break;
             case BAB:
                 System.out.println("\n продажа, БелАгропромБанк");
+                System.out.println("по выходным курс недоступен");
                 rates = loadRatesBAB();
                 ratesBAB.putAll(rates);
                 allowWrite = checkFile(bank, Test.getFilePath());
@@ -98,14 +118,16 @@ public class Test {
                 dfbank);
         //2
         BABLoader loader = new BABLoader();
-        TreeMap<Date, HashMap<String, Double>> ratesDatesRange = new TreeMap<>();
+        TreeMap<Date, HashMap<String, Double>> ratesDatesRange
+                = new TreeMap<>();
         Date key;
         HashMap<String, Double> value;
         Double loadError = -1D;
         for (String allDate : allDates) {
             key = ProcessDate.stringToDate(allDate, dfbank);
             value = PrintRates.loadRatesOnDate(loader, allDate);
-            if (value.get(SiteLoader.Currency.EUR.toString()) != loadError) {
+            if (!(value.get(SiteLoader.Currency.EUR.toString())
+                    .equals(loadError))) {
                 ratesDatesRange.put(key, value);
             }
         }
@@ -174,11 +196,13 @@ public class Test {
         return ratesNBRB;
     }
 
-    public static void setRatesBAB(TreeMap<Date, HashMap<String, Double>> ratesBAB) {
+    public static void setRatesBAB(TreeMap<Date, HashMap<String, Double>>
+                                           ratesBAB) {
         Test.ratesBAB = ratesBAB;
     }
 
-    public static void setRatesNBRB(TreeMap<Date, HashMap<String, Double>> ratesNBRB) {
+    public static void setRatesNBRB(TreeMap<Date, HashMap<String, Double>>
+                                            ratesNBRB) {
         Test.ratesNBRB = ratesNBRB;
     }
 

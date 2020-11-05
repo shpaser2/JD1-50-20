@@ -1,7 +1,6 @@
 package homework8.SiteLoader.service;
 
 import homework8.SiteLoader.Test;
-import homework8.SiteLoader.closedSandbox.TestCl1;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -85,8 +84,7 @@ public class FilesHandling {
                         "<>:\\\"|?* или любой символ из ASCII до 20го");
                 System.out.println("Будет использован путь к папке с " +
                         "исходным кодом данной программы.");
-                String pathToSrc = createFileInSrcPath();
-                usedPath = handlePathForRates(pathToSrc);
+                usedPath = handlePathForRates("");
             }
 
             allowWrite = checkFile(bank, usedPath.toString());
@@ -104,13 +102,13 @@ public class FilesHandling {
     //1 - корневой абсолютный, root/
     //2 - путь внутри к директории с исходниками,
     //      JD1-50-20/homework/src/
-    //3 - путь к пакету с исзодниками классов, package
+    //3 - путь к пакету с исходниками классов, package
     //создание пути к файлу рядом с исходником независимо от ОС и пк
-    private static String createFileInSrcPath() {
+    private static String getPathToSrcDir() {
         //1
         String root = Paths.get(Test.class.getTypeName())
                 .toAbsolutePath().toString()
-                .replaceAll(TestCl1.class.getName(),"");
+                .replaceAll(Test.class.getName(),"");
         //2
         String src = "JD1-50-20" + File.separator + "homework"
                 + File.separator + "src" + File.separator;
@@ -137,6 +135,9 @@ public class FilesHandling {
         try {
             Path dest = Paths.get(path);
             if (Files.isDirectory(dest)) {
+                if (path.length() == 0) {
+                    path = getPathToSrcDir();
+                }
                 if (!Files.exists(dest)) {
                     Files.createDirectories(dest);
                 }
@@ -180,16 +181,24 @@ public class FilesHandling {
         }
         try (FileInputStream fis = new FileInputStream(getFilePath());
              ObjectInputStream ois = new ObjectInputStream(fis)){
-            Integer bankName = ois.readInt();
-            System.out.println(bankName);
+            Integer bankNumber = ois.readInt();
+
+            for (Banks b : Banks.values()) {
+                if (bankNumber == b.getNumber()) {
+                    System.out.println("Работаем сохраненными курсами банка "
+                            + b);
+                    break;
+                }
+            }
+
             TreeMap<Date, HashMap<String, Double>> rates  =
                     (TreeMap<Date, HashMap<String, Double>>) ois.readObject();
-            if (bankName == Banks.NBRB.getNumber()) {
+            if (bankNumber == Banks.NBRB.getNumber()) {
                 TreeMap<Date, HashMap<String, Double>> nbrb =
                         getRatesNBRB();
                 nbrb.putAll(rates);
                 Test.setRatesNBRB(nbrb);
-            } else if (bankName == Banks.BAB.getNumber()) {
+            } else if (bankNumber == Banks.BAB.getNumber()) {
                 TreeMap<Date, HashMap<String, Double>> bab =
                         Test.getRatesBAB();
                 bab.putAll(rates);
