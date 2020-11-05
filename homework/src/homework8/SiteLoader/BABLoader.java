@@ -2,7 +2,6 @@ package homework8.SiteLoader;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static homework8.SiteLoader.ProcessDate.transformCurrentDate;
 
 public class BABLoader extends SiteLoader{
 
@@ -13,8 +12,7 @@ public class BABLoader extends SiteLoader{
      */
     @Override
     public double load(Currency currencyName) {
-        String date = transformCurrentDate();
-        //weekend not works with BelAgroBank
+        //weekends not works with BelAgroBank
 //        return load("https://belapb.by/ExCardsDaily.php?ondate=08/22/2020",
 //              currencyName);
         //weekday works good
@@ -58,9 +56,6 @@ public class BABLoader extends SiteLoader{
         Matcher matcher = pattern.matcher(content);
         String answer;
         if (!matcher.find()) {
-            answer = "Это выходной день или он ещё не наступил. " +
-                    "\n Актуальные курсы не доступны";
-            System.out.println(answer);
             return -1;
         } else {
             answer = content.substring(matcher.start(), matcher.end())

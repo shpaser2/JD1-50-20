@@ -1,4 +1,4 @@
-package homework8.SiteLoader;
+package homework8.SiteLoader.service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
