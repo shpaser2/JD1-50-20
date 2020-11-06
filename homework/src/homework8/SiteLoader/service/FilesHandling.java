@@ -124,6 +124,30 @@ public class FilesHandling {
         return all;
     }
 
+
+
+    //1 - корневой абсолютный, root/
+    //2 - путь внутри к директории с исходниками,
+    //      JD1-50-20/homework/src/
+    //3 - путь к пакету с исходниками классов, package
+    //создание пути к файлу рядом с исходником независимо от ОС и пк
+    public static <T> String getPathToSrcDir(T ob) {
+        //1
+        String root = Paths.get(ob.getClass().getTypeName())
+                .toAbsolutePath().toString()
+                .replaceAll(ob.getClass().getName(),"");
+        //2
+        String src = "JD1-50-20" + File.separator + "homework"
+                + File.separator + "src" + File.separator;
+        //3
+        String pckg = ob.getClass().getPackageName()
+                .replace('/', '\\');
+        String all = root + src + pckg;
+        String separatorRegex = "\\" + File.separator;
+        all = all.replaceAll("[/.\\\\]", separatorRegex);
+        return all;
+    }
+
     /**
      * Проверяется путь на файл rates.txt или на папку,
      * где есть файл rates.txt. Если по указанному пути нет rates.txt

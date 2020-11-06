@@ -28,19 +28,7 @@ public class BPSLoader extends SiteLoader{
     protected double handle(String content, Currency currencyName) {
         String commonPattern = "[\\w\\/\\>\\<\\s=\\\"]+(\\d,\\d{3,5})";
         Pattern pattern;
-        switch (currencyName) {
-            case USD: //USD[\w\/\>\<\s="]+(\d,\d{3,5})
-                pattern = Pattern.compile(currencyName.USD.toString().concat(commonPattern));
-                break;
-            case EUR:
-                pattern = Pattern.compile(currencyName.EUR.toString().concat(commonPattern));
-                break;
-            case RUB:
-                pattern = Pattern.compile(currencyName.RUB.toString().concat(commonPattern));
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + currencyName);
-        }
+        pattern = Pattern.compile(currencyName.name().concat(commonPattern));
         Matcher matcher = pattern.matcher(content);
         matcher.find();
         String buf = content.substring(matcher.start(),

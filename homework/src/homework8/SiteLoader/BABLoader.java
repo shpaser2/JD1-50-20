@@ -13,8 +13,6 @@ public class BABLoader extends SiteLoader{
     @Override
     public double load(Currency currencyName) {
         //weekends not works with BelAgroBank
-//        return load("https://belapb.by/ExCardsDaily.php?ondate=08/22/2020",
-//              currencyName);
         //weekday works good
         return load("https://belapb.by/ExCardsDaily.php?ondate=10/23/2020",
                 currencyName);
@@ -36,23 +34,7 @@ public class BABLoader extends SiteLoader{
     protected double handle(String content, Currency currencyName) {
         String commonPattern = ".+(\\n\\s+[\\w\\d\\.<>\\/]+){3}";
         Pattern pattern;
-        switch (currencyName) {
-            case USD:
-                pattern = Pattern.compile(Currency.USD.toString()
-                        .concat(commonPattern));
-                break;
-            case EUR:
-                pattern = Pattern.compile(Currency.EUR.toString()
-                        .concat(commonPattern));
-                break;
-            case RUB:
-                pattern = Pattern.compile(Currency.RUB.toString()
-                        .concat(commonPattern));
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: "
-                        + currencyName);
-        }
+        pattern = Pattern.compile(currencyName.name().concat(commonPattern));
         Matcher matcher = pattern.matcher(content);
         String answer;
         if (!matcher.find()) {
