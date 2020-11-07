@@ -141,7 +141,7 @@ public class WarAndPeace {
      * @param filePath путь к файлу.
      * @return строка с содержимым файла.
      */
-    private static String readAllBytesJava7(String filePath) {
+    public static String readAllBytesJava7(String filePath) {
         String content = "";
         try {
             content = new String(Files.readAllBytes(Paths.get(filePath)));

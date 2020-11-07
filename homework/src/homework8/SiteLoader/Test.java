@@ -39,7 +39,7 @@ public class Test {
         Banks bank = chooseBank();
         Test.setBankNumber(bank);
         enterPathToRates();
-        readAllFile();
+        readAllRatesFile();
         suggestWatchFile();
         workWithBanks();
     }

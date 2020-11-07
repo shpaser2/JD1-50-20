@@ -148,6 +148,13 @@ public class FilesHandling {
         return all;
     }
 
+    public static Path pathWithFileInside(String folderPath,
+                                          String fileNameWithSuffix) {
+        String filePath = folderPath + File.separator
+                + fileNameWithSuffix;
+        return Paths.get(filePath);
+    }
+
     /**
      * Проверяется путь на файл rates.txt или на папку,
      * где есть файл rates.txt. Если по указанному пути нет rates.txt
@@ -197,7 +204,7 @@ public class FilesHandling {
         }
     }
 
-    public static void readAllFile() {
+    public static void readAllRatesFile() {
         Banks bank = Test.getBank();
         if (bank == Banks.BPS || bank == Banks.UNKNOWN) {
             return;     //Next lines not works with BPS or UNKNOWN bank
